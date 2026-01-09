@@ -8,6 +8,10 @@
 - [Canvas](https://byu.instructure.com)
 - [MDN](https://developer.mozilla.org)
 
+## Git
+
+If you want to modify a file, then you must ensure the file is saved before you stage it.
+
 ## AWS
 
 My IP address is: 54.81.96.130
