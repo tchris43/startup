@@ -5,10 +5,10 @@ Don't Miss
 ## 🚀 Specification Deliverable
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
+- [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
+- [x] Description of key features
+- [x] Description of how you will use each technology
 - [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
@@ -22,6 +22,7 @@ Have you ever realized just moments too late that you missed out on attending on
 ### Key features
 
 - Secure login over https
+- Ability to sign up for account
 - Ability to select and change user preferences
 - Ability to use arrows to browse upcoming events
 - Ability to invite other users with a custom message
@@ -30,12 +31,15 @@ Have you ever realized just moments too late that you missed out on attending on
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Uses correct HTML structure. 5 HTML pages, 1 for login, 1 for sign up, 1 for event listings, 1 for settings, and 1 for sending invites
+- **CSS** - Application styling that looks good on different screen sizes. Spacing, and colors look good. Gives it a movie theatre kind of feel.
+- **React** - Provides login, sign up, event browsing capability, preference selection, and invite capability
+- **Service** - Backend service with endpoints for:
+  -login
+  -retrieving user preferences
+  -setting user preferences
+- **DB/Login** - Store user preferences and messages. Login and register users. Credentials securely stored in database. 
+- **WebSocket** - A message can be recieved/sent in real time from one user to another.
 
 ## 🚀 AWS deliverable
 
