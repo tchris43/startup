@@ -14,8 +14,9 @@ If you want to modify a file, then you must ensure the file is saved before you 
 
 ## AWS
 
-My IP address is: 54.81.96.130
-Launching my AMI I initially put it on a private subnet. Even though it had a public IP address and the security group was right, I wasn't able to connect to it.
+My IP address is: 67.202.52.219
+I made it a static IP so it can stay the same even if I have to change the instance. 
+The command to SSH into it is: ssh -i ~/path_to_key ubuntu@67.202.52.219
 
 ## Caddy
 
