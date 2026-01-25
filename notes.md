@@ -33,6 +33,12 @@ This was easy. I was careful to use the correct structural elements such as head
 
 The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
 
+-go to deploy files.sh (bash_script) **Must be in git-bash
+-check that pem key, hostname(server), service are all there
+-it just deletes what is there and copies the new stuff to the server
+-h is the url -s is which one to update
+
+
 use width, not size for image size
 
 ## CSS
