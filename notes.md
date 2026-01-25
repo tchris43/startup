@@ -38,6 +38,8 @@ The part I didn't like was the duplication of the header and footer code. This i
 -it just deletes what is there and copies the new stuff to the server
 -h is the url -s is which one to update
 
+make sure to deploy with this: ./deployFiles.sh -k ~/OneDrive/Desktop/cs260/pasukon_kagi.pem -h nextevent.click -s simon
+and be sure that you are in the directory of the file you are trying to deploy.
 
 use width, not size for image size
 
