@@ -32,7 +32,7 @@ The part I didn't like was the duplication of the header and footer code. This i
 
 use divs to make your content be not all on the same line
 
-span really 
+span lets you put elements side by side
 
 ## CSS
 
