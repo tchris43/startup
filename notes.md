@@ -13,13 +13,19 @@
 If you want to modify a file, then you must ensure the file is saved before you stage it.
 
 ## AWS
+First, I had to rent an EC2 server with the Amazon Machine Image that the class provided. I used t3.nano since I won't need a very powerful CPU. I launched my instance and got the IP address.
+Second, I had to get a domain name through Route 53. I rented nextevent.click and registered it as A for my ip address.
 
-My IP address is: 54.81.96.130
-Launching my AMI I initially put it on a private subnet. Even though it had a public IP address and the security group was right, I wasn't able to connect to it.
+It all worked just like it said it would in the instructions. I just had to 
+
+My IP address is: 67.202.52.219
+I made it a static IP so it can stay the same even if I have to change the instance. 
+ The command to SSH into it is: ssh -i ~/path_to_key ubuntu@67.202.52.219
 
 ## Caddy
 
 No problems worked just like it said in the [instruction](https://github.com/webprogramming260/.github/blob/main/profile/webServers/https/https.md).
+i turns the ssh into insert and esc lets you input commands like :wq (save and quit)
 
 ## HTML
 
@@ -27,12 +33,24 @@ This was easy. I was careful to use the correct structural elements such as head
 
 The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
 
+<<<<<<< HEAD
 <label> label </label>
 <input type = "text" placeholder="">
 
 use divs to make your content be not all on the same line
 
 span lets you put elements side by side
+=======
+-go to deploy files.sh (bash_script) **Must be in git-bash
+-check that pem key, hostname(server), service are all there
+-it just deletes what is there and copies the new stuff to the server
+-h is the url -s is which one to update
+
+make sure to deploy with this: ./deployFiles.sh -k ~/OneDrive/Desktop/cs260/pasukon_kagi.pem -h nextevent.click -s simon
+and be sure that you are in the directory of the file you are trying to deploy.
+
+use width, not size for image size
+>>>>>>> 71e19983f24b20ae12fc2dc988b8dde4c9307ebd
 
 ## CSS
 
