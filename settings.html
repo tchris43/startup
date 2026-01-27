@@ -25,18 +25,33 @@
                 <fieldset>
                     <legend>Select your interests</legend>
                     <div>
-                        <input type="checkbox" value = "concerts">
+                        <input type="checkbox" id = "concerts" name = "interests" value = "concerts">
                         <label for = "concerts">Concerts</label>
                     </div>
                     <div>
-                        <input type="checkbox" value = "dances">
+                        <input type="checkbox" id = "dances" name = "interests" value = "dances">
                         <label for = "dances">Dances</label>
                     </div>
                     <div>
-                        <input type="checkbox" value = "plays">
+                        <input type="checkbox" id = "plays" name = "interests" value = "plays">
                         <label for = "plays">Plays</label>
                     </div>
+
+                    <div>
+                        <label for = "price">Select price range</label>
+                        <select id="price" name ="price">
+                            <option value="low">$0-$15</option>
+                            <option value="low">$0-$30</option>
+                            <option value="low">$0-$45</option>
+                            <option value="low">$0-$60</option>
+                            <option value="low">$0-$80</option>
+                            <option value="low">$0-$100</option>
+                            <option value="low">Any Price</option>
+                        </select>
+                    </div>
                 </fieldset>
+
+                
             </form>
         </main>
     </body>
