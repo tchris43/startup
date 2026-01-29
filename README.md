@@ -50,16 +50,16 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 ## 🚀 HTML deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x]  I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [x] **HTML pages** - Three HTML pages representing ability to login, browse events, and save preferences.
+- [x] **Proper HTML element usage** - I correctly used head, body, header, nav, main, footer, and many other elements
+- [x] **Links** - Login page links to discover page, settings also links to discover page, but each page has links to all three.
+- [x] **Text** - I added captures to each of my event placeholders.
+- [x] **3rd party API placeholder** - Placeholders for where I will display the event information from the APIs
+- [x] **Images** - I used card images for my events. 
+- [x] **Login placeholder** - Input box for login
+- [x] **DB data placeholder** - The preferences will be set to the saved responses from the database
+- [x] **WebSocket placeholder** - The Invite text field will be a real time websocket feature that lets you get and recieve invites.
 
 ## 🚀 CSS deliverable
 

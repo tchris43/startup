@@ -33,14 +33,14 @@ This was easy. I was careful to use the correct structural elements such as head
 
 The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
 
-<<<<<<< HEAD
 <label> label </label>
 <input type = "text" placeholder="">
 
 use divs to make your content be not all on the same line
 
 span lets you put elements side by side
-=======
+
+
 -go to deploy files.sh (bash_script) **Must be in git-bash
 -check that pem key, hostname(server), service are all there
 -it just deletes what is there and copies the new stuff to the server
@@ -49,8 +49,9 @@ span lets you put elements side by side
 make sure to deploy with this: ./deployFiles.sh -k ~/OneDrive/Desktop/cs260/pasukon_kagi.pem -h nextevent.click -s simon
 and be sure that you are in the directory of the file you are trying to deploy.
 
+Also make sure you have saved the deployment file or nothing may happen.
+
 use width, not size for image size
->>>>>>> 71e19983f24b20ae12fc2dc988b8dde4c9307ebd
 
 ## CSS
 
