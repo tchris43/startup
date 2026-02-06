@@ -1,7 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-width: 375px;
+    min-height: 100vh;
+}
 
 nav {
     display: flex;
+}
+
+header{
+    display: flex;
+    flex: 0 80px;
+    font-family: "Orbitron", sans-serif;
 }
 
 #logo {
@@ -15,12 +32,25 @@ nav {
 
 menu {
     display: flex;
+    flex-direction: row !important;
     padding-left: 0;
 }
 
+a:hover {
+    color: rgb(244, 146, 146) !important;
+}
 
 
 li {
     list-style: none;
-    padding: 1em;   
+    padding: 1em; 
+    padding-top: 2em; 
+}
+
+main {
+    flex: 1 calc(100vh - 120px);
+}
+
+footer {
+    flex: 0 80px;
 }

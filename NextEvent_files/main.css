@@ -1,0 +1,28 @@
+html, body {
+    height: 100%;
+}
+
+nav {
+    display: flex;
+}
+
+#logo {
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+    margin: 0;
+    font-size: 20px;
+}
+
+menu {
+    display: flex;
+    padding-left: 0;
+}
+
+
+
+li {
+    list-style: none;
+    padding: 1em;   
+}

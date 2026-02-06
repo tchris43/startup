@@ -1,5 +1,5 @@
-<DOCTYPE HTML!>
-    <html lang = "en">
+<!DOCTYPE html>
+<html lang="en">
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>NextEvent</title>
@@ -12,25 +12,29 @@
 
              <link rel="stylesheet" href="main.css" />
 
+             <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+
         </head>
-        <body>
+        <body class = "bg-dark text-light">
             <header>
-                <nav>
-                    <a id="logo" href="#">NextEvent<sup>&reg;</sup></a>
-                    <menu>
+                <nav class = "navbar navbar-dark">
+                    <a class = "navbar-brand" id="logo" href="#">NextEvent<sup>&reg;</sup></a>
+                    <menu class = "navbar-nav">
                         <li>
-                            <a href = "index.html">Home</a>
+                            <a class = "nav-link" href = "index.html">Home</a>
                         </li>
                         <li>
-                            <a href = "search.html">Discover</a>
+                            <a class = "nav-link" href = "search.html">Discover</a>
                         </li>
                         <li>
-                            <a href = "settings.html">Preferences</a>
+                            <a class = "nav-link" href = "settings.html">Preferences</a>
                         </li>
                     </menu>
                 </nav>
             </header>
-            <main>
+            <main class="text-center">
                 <form method="get" action="search.html">
                     <div>
                         <label for = "username">Username:</label>
@@ -43,10 +47,9 @@
                     <button type="submit">Login</button>
                 </form>
             </main>
+            <footer>
+                <p>Taylor Christensen</p>
+                <a href="https://github.com/tchris43/startup/">github</p>
+            </footer>
         </body>
-        <footer>
-            <p>Taylor Christensen</p>
-            <a href="https://github.com/tchris43/startup/">github</p>
-        </footer>    
-    </html>
-</DOCTYPE>
+</html>
