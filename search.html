@@ -39,7 +39,7 @@
                 Your Upcoming Events
             </h2>
             <div id="upcomingCarousel" class="carousel slide">
-                <div class = "upcoming carousel-item">
+                <div id = "slide1" class = "upcoming carousel-item">
                     <span class = "card">
                         <img src = "card.png" width = 200>
                         <figcaption>Event 1</figcaption>
@@ -53,7 +53,7 @@
                         <figcaption>Event 3</figcaption>
                     </span>
                 </div>
-                <div class = "upcoming carousel-item">
+                <div id = "slide2" class = "upcoming carousel-item">
                     <span class = "card">
                         <img src = "card.png" width = 200>
                         <figcaption>Event 4</figcaption>
@@ -67,30 +67,53 @@
                         <figcaption>Event 6</figcaption>
                     </span>
                 </div>
-                <button type = button class="carousel-control-prev" data-bs-target="#upcomingCarousel" role = "button" data-bs-slide="prev">
+                <a class="carousel-control-prev" data-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
-                </button>
-                </div>
-                <button type = button class="carousel-control-next" data-bs-target="#upcomingCarousel" role = "button" data-bs-slide="next">
+                </a>
+                <a class="carousel-control-next" data-slide="next">
                     <span class="carousel-control-next-icon"></span>
-                </button>
+                </a>
             </div>
             <br>
             <h2>
                 Browse Events
             </h2>
-            <span>
-                <img src = "card.png" width = 200>
-                <figcaption>Event 1</figcaption>
-            </span>
-            <span>
-                <img src = "card.png" width = 200>
-                <figcaption>Event 2</figcaption>
-            </span>
-            <span>
-                <img src = "card.png" width = 200>
-                <figcaption>Event 3</figcaption>
-            </span>
+            <div id="eventCarousel" class="carousel slide">
+                <div id = "slide1" class = "upcoming carousel-item">
+                    <span class = "card">
+                        <img src = "card.png" width = 200>
+                        <figcaption>Event 1</figcaption>
+                    </span>
+                    <span class = "card">
+                        <img src = "card.png" width = 200>
+                        <figcaption>Event 2</figcaption>
+                    </span>
+                    <span class = "card">
+                        <img src = "card.png" width = 200>
+                        <figcaption>Event 3</figcaption>
+                    </span>
+                </div>
+                <div id = "slide2" class = "upcoming carousel-item">
+                    <span class = "card">
+                        <img src = "card.png" width = 200>
+                        <figcaption>Event 4</figcaption>
+                    </span>
+                    <span class = "card">
+                        <img src = "card.png" width = 200>
+                        <figcaption>Event 5</figcaption>
+                    </span>
+                    <span class = "card">
+                        <img src = "card.png" width = 200>
+                        <figcaption>Event 6</figcaption>
+                    </span>
+                </div>
+                <a class="carousel-control-prev" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
 
             <label for="invites">Invites:</label>
             <textarea id="invites" name="invites">Send and recieve invites!</textarea>
