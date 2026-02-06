@@ -59,6 +59,8 @@ main {
 .upcoming {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .card {
