@@ -56,6 +56,15 @@ main {
     
 }
 
+.upcoming {
+    display: flex;
+    flex-direction: row;
+}
+
+.card {
+    padding: 1em;
+}
+
 footer {
     flex: 0 80px;
 }

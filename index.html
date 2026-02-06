@@ -34,17 +34,19 @@
                     </menu>
                 </nav>
             </header>
-            <main class="text-center">
+            <main class="container-fluid text-center bg-light text-dark">
                 <form method="get" action="search.html">
-                    <div>
-                        <label for = "username">Username:</label>
-                        <input type = "text" placeholder="your name">
+                    <h1>Welcome to NextEvent</h1>
+                    <div class="input-group">
+                        <span class = "input-group-text"for = "username">Username:</span>
+                        <input class="form-control" type = "text" placeholder="your name">
                     </div>
-                    <div>
-                        <label for = "password">Password:</label>
-                        <input type = "text" placeholder="your pasword">
+                    <div class="input-group">
+                        <span class = "input-group-text" for = "password">Password:</span>
+                        <input class = "form-control" type = "password" placeholder="your pasword">
                     </div>
-                    <button type="submit">Login</button>
+                    <button type="submit" class = "btn btn-primary">Login</button>
+                    <button type="submit" class = "btn btn-secondary">Create</button>
                 </form>
             </main>
             <footer>
