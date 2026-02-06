@@ -67,6 +67,10 @@ main {
     padding: 1em;
 }
 
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(44, 38, 38, 0.5);
+}
+
 footer {
     flex: 0 80px;
 }
