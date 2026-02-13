@@ -2,32 +2,48 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
+import { Discover } from './discover/discover';
+import { Preferences } from './preferences/preferences';
+
 export default function App() {
     return (
-        <div className="body bg-dark text-light">
-            <header>
-                <nav class = "navbar navbar-dark">
-                    <a class = "navbar-brand" id="logo" href="#">NextEvent<sup>&reg;</sup></a>
-                    <menu class = "navbar-nav">
-                        <li>
-                            <a class = "nav-link" href = "index.html">Home</a>
-                        </li>
-                        <li>
-                            <a class = "nav-link" href = "search.html">Discover</a>
-                        </li>
-                        <li>
-                            <a class = "nav-link" href = "settings.html">Preferences</a>
-                        </li>
-                    </menu>
-                </nav>
-            </header>   
+        <BrowserRouter>
+            <div className="body bg-dark text-light">
+                <header>
+                    <nav className= "navbar navbar-dark">
+                        <div className= "navbar-brand" id="logo">NextEvent<sup>&reg;</sup></div>
+                        <menu className= "navbar-nav">
+                            <li>
+                                <NavLink className= "nav-link" to = "/">Home</NavLink>
+                            </li>
+                            <li>
+                                <NavLink className= "nav-link" to = "discover">Discover</NavLink>
+                            </li>
+                            <li>
+                                <NavLink className= "nav-link" to = "preferences">Preferences</NavLink>
+                            </li>
+                        </menu>
+                    </nav>
+                </header>   
 
-            <main> App Components go here</main>
-            
-            <footer>
-                <p>Taylor Christensen</p>
-                <a href="https://github.com/tchris43/startup/">github</a>
-            </footer>
-        </div>
+                <Routes>
+                    <Route path='/' element={<Login />} exact />
+                    <Route path='/discover' element={<Discover />} />
+                    <Route path='/preferences' element={<Preferences />} />
+                    <Route path='*' element={<NotFound />} />
+                </Routes>
+                
+                <footer>
+                    <p>Taylor Christensen</p>
+                    <NavLink href="https://github.com/tchris43/startup/">github</NavLink>
+                </footer>
+            </div>
+        </BrowserRouter>
     );
+}
+
+function NotFound() {
+  return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }
