@@ -1,11 +1,11 @@
 import React from 'react';
 
-export function Preferences() {
+export function Preferences({user}) {
   return (
     <main class="bg-light text-dark">
             <form method = "get" action="search.html">
                 <fieldset>
-                    <legend>Select your preferences</legend>
+                    <legend>Select your preferences - {user}</legend>
                     <div>
                         <input type="checkbox" id = "concerts" name = "interests" value = "concerts" />
                         <label for = "concerts">Concerts</label>
