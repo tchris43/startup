@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export function Login({setUser}) {
+export function Unauthenticated({setUser}) {
   const [text, setText] = React.useState('');
   const navigate = useNavigate();
 
@@ -26,8 +26,8 @@ export function Login({setUser}) {
               <span className = "input-group-text" for = "password">Password:</span>
               <input className = "form-control" type = "password" placeholder="your password"/>
           </div>
-          <button onClick = {loginUser} disabled className = "btn btn-primary">Login</button>
-          <button type="submit" disabled className = "btn btn-secondary">Create</button>
+          <button onClick = {loginUser} disabled={!user || !password} className = "btn btn-primary">Login</button>
+          <button type="submit" disabled={!user || !password} className = "btn btn-secondary">Create</button>
     </main>
   );
 }

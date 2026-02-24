@@ -6,9 +6,12 @@ import { BrowserRouter, NavLink, Route, Routes, useNavigate } from 'react-router
 import { Login } from './login/login';
 import { Discover } from './discover/discover';
 import { Preferences } from './preferences/preferences';
+import { AuthState } from './login/authState';
 
 export default function App() {
     const [user, setUser] = React.useState(localStorage.getItem('user') || null);
+    const currentAuthState = user ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
 
     return (
         <BrowserRouter>
@@ -22,17 +25,21 @@ export default function App() {
                                 <NavLink className= "nav-link" to = "/">Home</NavLink>
                             </li>
                             <li>
-                                {user && <NavLink className= "nav-link" to = "discover">Discover</NavLink>}
+                                {authState === AuthState.Authenticated && <NavLink className= "nav-link" to = "discover">Discover</NavLink>}
                             </li>
                             <li>
-                                {user && <NavLink className= "nav-link" to = "preferences">Preferences</NavLink>}
+                                {authState === AuthState.Authenticated && <NavLink className= "nav-link" to = "preferences">Preferences</NavLink>}
                             </li>
                         </menu>
                     </nav>
                 </header>   
 
                 <Routes>
-                    <Route path='/' element={<Login setUser = {setUser}/>} exact />
+                    <Route path='/' element={<Login 
+                                            setUser = {setUser}
+                                            setAuthState = {setAuthState}
+                                            
+                                            />} exact />
                     <Route path='/discover' element={<Discover user = {user}/>} />
                     <Route path='/preferences' element={<Preferences user = {user} />} />
                     <Route path='*' element={<NotFound />} />
