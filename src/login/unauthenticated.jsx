@@ -2,14 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function Unauthenticated({user, onLogin}) {
-  const [userName, setUserName] = React.useState('');
+  const [userName, setUserName] = React.useState(user);
   const navigate = useNavigate();
   const [password, setPassword] = React.useState('');
 
   function loginUser() {
     localStorage.setItem('user', userName);
-    onLogin(user);
-    navigate('/discover');
+    onLogin(userName);
   }
 
   function createUser() {
