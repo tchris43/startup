@@ -14,6 +14,8 @@ export function Authenticated({user, onLogout}) {
     <div>
         {console.log("entered")}
         <h1> {user} </h1>
+        <button onClick = {() => navigate('/discover')} className = "btn btn-primary">Discover</button>
+        <button onClick = {() => logout()} className = "btn btn-secondary">Logout</button>
     </div>
   );
 }

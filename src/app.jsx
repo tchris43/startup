@@ -18,7 +18,6 @@ export default function App() {
             <div className="body bg-dark text-light">
                 <header>
                     <nav className= "navbar navbar-dark">
-                        <div>{user}</div>
                         <div className= "navbar-brand" id="logo">NextEvent<sup>&reg;</sup></div>
                         <menu className= "navbar-nav">
                             <li>
