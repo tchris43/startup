@@ -36,9 +36,12 @@ export default function App() {
 
                 <Routes>
                     <Route path='/' element={<Login 
-                                            setUser = {setUser}
-                                            setAuthState = {setAuthState}
-                                            
+                                            user = {user}
+                                            authState = {authState} 
+                                            onAuthChange = {(user, authState) => {
+                                                setUser(user);
+                                                setAuthState(authState);
+                                            }}                          
                                             />} exact />
                     <Route path='/discover' element={<Discover user = {user}/>} />
                     <Route path='/preferences' element={<Preferences user = {user} />} />

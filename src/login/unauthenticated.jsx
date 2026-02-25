@@ -1,33 +1,35 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export function Unauthenticated({setUser}) {
-  const [text, setText] = React.useState('');
+export function Unauthenticated({user, onLogin}) {
+  const [userName, setUserName] = React.useState('');
   const navigate = useNavigate();
+  const [password, setPassword] = React.useState('');
 
   function loginUser() {
-    localStorage.setItem('user', text);
-    setUser(text);
+    localStorage.setItem('user', userName);
+    onLogin(user);
     navigate('/discover');
   }
 
-  function textChange(e) {
-    setText(e.target.value);
+  function createUser() {
+    loginUser();
   }
 
+
   return (
-    <main className="container-fluid text-center bg-light text-dark">
-          <h1>Welcome to NextEvent</h1>
-          <div className="input-group">
-              <span className = "input-group-text"for = "username">Username:</span>
-              <input className="form-control" type = "text" placeholder="your name" onChange = {textChange}/>
-          </div>
-          <div className="input-group">
-              <span className = "input-group-text" for = "password">Password:</span>
-              <input className = "form-control" type = "password" placeholder="your password"/>
-          </div>
-          <button onClick = {loginUser} disabled={!user || !password} className = "btn btn-primary">Login</button>
-          <button type="submit" disabled={!user || !password} className = "btn btn-secondary">Create</button>
-    </main>
+
+    <div>
+      <div className="input-group">
+         <span className = "input-group-text"for = "username" >Username:</span>
+         <input className="form-control" type = "text" onChange = {(e) => setUserName(e.target.value)} placeholder="your name"/>
+      </div>
+      <div className="input-group">
+        <span className = "input-group-text" for = "password">Password:</span>
+        <input className = "form-control" type = "password" placeholder="your password" onChange = {(e) => setPassword(e.target.value)}/>
+      </div>
+      <button onClick = {() => loginUser()} disabled={!userName || !password} className = "btn btn-primary">Login</button>
+      <button onClick = {() => createUser()} type="submit" disabled={!userName || !password} className = "btn btn-secondary">Create</button>
+    </div>
   );
 }
