@@ -178,8 +178,23 @@ export function Discover({ user }) {
                     </span>
                 </div>
 
-                <button onClick = {() => setSlide((slide+1)%2)} className="carousel-control-prev carousel-control-prev-icon"/>
-                <button onClick = {() => setSlide((slide+1)%2)} className="carousel-control-next carousel-control-next-icon"/>
+                <div className={`upcoming carousel-item ${slide === 2? 'active' : ''}`}>
+                    <span className="card left-card">
+                        <img src="card.png" width={200} />
+                        <figcaption>Event 7</figcaption>
+                    </span>
+                    <span className="card left-card">
+                        <img src="card.png" width={200} />
+                        <figcaption>Event 8</figcaption>
+                    </span>
+                    <span className="card left-card">
+                        <img src="card.png" width={200} />
+                        <figcaption>Event 9</figcaption>
+                    </span>
+                </div>
+
+                <button onClick = {() => setSlide((slide === 0? 2 : slide-1))} className="carousel-control-prev carousel-control-prev-icon"/>
+                <button onClick = {() => setSlide((slide === 2? 0 : slide+1))} className="carousel-control-next carousel-control-next-icon"/>
 
             </div>
 
@@ -222,8 +237,23 @@ export function Discover({ user }) {
                     </span>
                 </div>
 
-                <button onClick = {() => setSlide2((slide2+1)%2)} className="carousel-control-prev carousel-control-prev-icon"/>
-                <button onClick = {() => setSlide2((slide2+1)%2)} className="carousel-control-next carousel-control-next-icon"/>
+                <div className={`upcoming carousel-item ${slide2 === 2? 'active' : ''}`}>
+                    <span className="card left-card">
+                        <img src="card.png" width={200} />
+                        <figcaption>Event 7</figcaption>
+                    </span>
+                    <span className="card left-card">
+                        <img src="card.png" width={200} />
+                        <figcaption>Event 8</figcaption>
+                    </span>
+                    <span className="card left-card">
+                        <img src="card.png" width={200} />
+                        <figcaption>Event 9</figcaption>
+                    </span>
+                </div>
+
+                <button onClick = {() => setSlide2(slide2 === 0? 2 : slide2-1)} className="carousel-control-prev carousel-control-prev-icon"/>
+                <button onClick = {() => setSlide2(slide2 === 2? 0 : slide2+1)} className="carousel-control-next carousel-control-next-icon"/>
 
             </div>
             
