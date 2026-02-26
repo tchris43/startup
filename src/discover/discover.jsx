@@ -11,7 +11,7 @@ export function Discover({ user }) {
         setInterval(() => {
             const names = ['bob', 'fish', 'tim'];
             const randomName = names[Math.floor(Math.random() * names.length)];
-            const randomCount = Math.floor(Math.random() * 100) + 1;
+            const randomCount = Math.floor(Math.random() * 9) + 1;
             const newMsg = `${randomName}: come with me to event ${randomCount}!`;
             setMsg(newMsg);
         }, 5000);
@@ -24,10 +24,22 @@ export function Discover({ user }) {
     const [invite, setInvite] = React.useState(null);
 
     const [events, setEvents] = React.useState(null);
+    const [preferredEvents, setpreferredEvents] = React.useState(null);
+    
 
     React.useEffect(() => {
         setEvents("card.png");
-    }, [])    
+    }, [])
+    
+    React.useEffect(() => {
+        setpreferredEvents("card.png");
+    }, [])   
+
+    function getPreferredEvents(() => {
+        const type = localStorage.getItem('type');
+        const price = localStorage.getItem('price');
+        const day = localStorage.getItem('day');
+    }
     
 
     return (
@@ -39,45 +51,45 @@ export function Discover({ user }) {
             <div className="carousel slide">
                 <div className={`upcoming carousel-item ${slide === 0? 'active' : ''}`}>
                     <span className="card left-card">
-                        <img src={events} width={200} />
+                        <img src={preferredEvents} width={200} />
                         <figcaption>Event 1</figcaption>
                     </span>
                     <span className="card left-card">
-                        <img src={events} width={200} />
+                        <img src={preferredEvents} width={200} />
                         <figcaption>Event 2</figcaption>
                     </span>
                     <span className="card left-card">
-                        <img src={events} width={200} />
+                        <img src={preferredEvents} width={200} />
                         <figcaption>Event 3</figcaption>
                     </span>
                 </div>
 
                 <div className={`upcoming carousel-item ${slide === 1? 'active' : ''}`}>
                     <span className="card left-card">
-                        <img src={events} width={200} />
+                        <img src={preferredEvents} width={200} />
                         <figcaption>Event 4</figcaption>
                     </span>
                     <span className="card left-card">
-                        <img src={events} width={200} />
+                        <img src={preferredEvents} width={200} />
                         <figcaption>Event 5</figcaption>
                     </span>
                     <span className="card left-card">
-                        <img src={events} width={200} />
+                        <img src={preferredEvents} width={200} />
                         <figcaption>Event 6</figcaption>
                     </span>
                 </div>
 
                 <div className={`upcoming carousel-item ${slide === 2? 'active' : ''}`}>
                     <span className="card left-card">
-                        <img src={events} width={200} />
+                        <img src={preferredEvents} width={200} />
                         <figcaption>Event 7</figcaption>
                     </span>
                     <span className="card left-card">
-                        <img src={events} width={200} />
+                        <img src={preferredEvents} width={200} />
                         <figcaption>Event 8</figcaption>
                     </span>
                     <span className="card left-card">
-                        <img src={events} width={200} />
+                        <img src={preferredEvents} width={200} />
                         <figcaption>Event 9</figcaption>
                     </span>
                 </div>
@@ -92,7 +104,7 @@ export function Discover({ user }) {
 
 
             <h2>
-                Browse {events}
+                Browse Events
             </h2>
 
             <div className="carousel slide">
@@ -141,7 +153,7 @@ export function Discover({ user }) {
                     </span>
                 </div>
 
-                {pop && <div className="position-fixed top-0 end-0 alert alert-info m-3">
+                {pop && <div className="position-fixed top-0 end-0 alert alert-success m-3">
                     {pop}
                 </div>}
 
@@ -152,7 +164,7 @@ export function Discover({ user }) {
             
             <label for="invites">Invites:</label>
             <textarea id="invites" name="invites" onChange={(e) => setInvite(e.target.value)}>Post and Recieve Invites!</textarea>
-            <div> {msg} </div>
+            <div className = "position-fixed bottom-0 end-0 alert alert-info"> {msg} </div>
             <button onClick={() => {
                 setPop(`"${user}: ${invite}" successfully posted!`);
                 setTimeout(() => setPop(null), 3000);
