@@ -138,7 +138,8 @@ export function Discover({ user }) {
         localStorage.setItem('count', count + 1);
     }
 
-    const [slide, setSlide] = React.useState(1);
+    const [slide, setSlide] = React.useState(0);
+    const [slide2, setSlide2] = React.useState(0);
 
     return (
         <main className="bg-light text-dark">
@@ -179,6 +180,50 @@ export function Discover({ user }) {
 
                 <button onClick = {() => setSlide((slide+1)%2)} className="carousel-control-prev carousel-control-prev-icon"/>
                 <button onClick = {() => setSlide((slide+1)%2)} className="carousel-control-next carousel-control-next-icon"/>
+
+            </div>
+
+            <hr/>
+            <hr/>
+
+
+            <h2>
+                Browse Events
+            </h2>
+
+            <div className="carousel slide">
+                <div className={`upcoming carousel-item ${slide2 === 0? 'active' : ''}`}>
+                    <span className="card left-card">
+                        <img src="card.png" width={200} />
+                        <figcaption>Event 1</figcaption>
+                    </span>
+                    <span className="card left-card">
+                        <img src="card.png" width={200} />
+                        <figcaption>Event 2</figcaption>
+                    </span>
+                    <span className="card left-card">
+                        <img src="card.png" width={200} />
+                        <figcaption>Event 3</figcaption>
+                    </span>
+                </div>
+
+                <div className={`upcoming carousel-item ${slide2 === 1? 'active' : ''}`}>
+                    <span className="card left-card">
+                        <img src="card.png" width={200} />
+                        <figcaption>Event 4</figcaption>
+                    </span>
+                    <span className="card left-card">
+                        <img src="card.png" width={200} />
+                        <figcaption>Event 5</figcaption>
+                    </span>
+                    <span className="card left-card">
+                        <img src="card.png" width={200} />
+                        <figcaption>Event 6</figcaption>
+                    </span>
+                </div>
+
+                <button onClick = {() => setSlide2((slide2+1)%2)} className="carousel-control-prev carousel-control-prev-icon"/>
+                <button onClick = {() => setSlide2((slide2+1)%2)} className="carousel-control-next carousel-control-next-icon"/>
 
             </div>
             
