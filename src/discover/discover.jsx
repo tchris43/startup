@@ -128,18 +128,19 @@ export function Discover({ user }) {
             const names = ['bob', 'fish', 'tim'];
             const randomName = names[Math.floor(Math.random() * names.length)];
             const randomCount = Math.floor(Math.random() * 100) + 1;
-            const newMsg = `${randomName}: ${randomCount}`;
+            const newMsg = `${randomName}: come with me to event ${randomCount}!`;
             setMsg(newMsg);
         }, 5000);
-    })
+    }, [])
 
     function sendInvite() {
-        setCount(count + 1);
-        localStorage.setItem('count', count + 1);
+        
     }
 
     const [slide, setSlide] = React.useState(0);
     const [slide2, setSlide2] = React.useState(0);
+    const [pop, setPop] = React.useState(null);
+    const [invite, setInvite] = React.useState(null);
 
     return (
         <main className="bg-light text-dark">
@@ -252,16 +253,22 @@ export function Discover({ user }) {
                     </span>
                 </div>
 
+                {pop && <div className="position-fixed top-0 end-0 alert alert-dark m-3">
+                    {pop}
+                </div>}
+
                 <button onClick = {() => setSlide2(slide2 === 0? 2 : slide2-1)} className="carousel-control-prev carousel-control-prev-icon"/>
                 <button onClick = {() => setSlide2(slide2 === 2? 0 : slide2+1)} className="carousel-control-next carousel-control-next-icon"/>
 
             </div>
             
             <label for="invites">Invites:</label>
-            <textarea id="invites" name="invites">Send and Recieve Invites!</textarea>
+            <textarea id="invites" name="invites" onChange={(e) => setInvite(e.target.value)}>Post and Recieve Invites!</textarea>
             <div> {msg} </div>
-            <button onClick={sendInvite}>Send!</button>
-            <div>{count}</div>
+            <button onClick={() => {
+                setPop(`"${user}: ${invite}" successfully posted!`);
+                setTimeout(() => setPop(null), 3000);
+            }}>Post!</button>
 
         </main>
     );
