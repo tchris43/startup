@@ -25,20 +25,21 @@ export function Discover({ user }) {
 
     const [events, setEvents] = React.useState(null);
     const [preferredEvents, setpreferredEvents] = React.useState(null);
-    
+
 
     React.useEffect(() => {
         setEvents("card.png");
     }, [])
     
     React.useEffect(() => {
-        setpreferredEvents("card.png");
+        setpreferredEvents(getPreferredEvents);
     }, [])   
 
-    function getPreferredEvents(() => {
+    function getPreferredEvents() {
         const type = localStorage.getItem('type');
         const price = localStorage.getItem('price');
         const day = localStorage.getItem('day');
+        return "card.png";
     }
     
 

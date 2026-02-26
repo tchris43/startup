@@ -84,8 +84,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - I made the login page functional, the carousel controls functional, the event images for now are hard coded but I mocked the api calls by having some useEffect functions that set the state of the events. I mocked out the post and recieve invites, I saved the preference settings and mocked out using those settings to return the correct events (for now it just returns the hard coded "image.png").
+- [x] **Hooks** - I used both useState hooks and useEvent hooks throughout my application
 
 ## 🚀 Service deliverable
 
