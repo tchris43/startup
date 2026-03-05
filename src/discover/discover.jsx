@@ -23,143 +23,92 @@ export function Discover({ user }) {
     const [pop, setPop] = React.useState(null);
     const [invite, setInvite] = React.useState(null);
 
-    const [events, setEvents] = React.useState(null);
-    const [preferredEvents, setpreferredEvents] = React.useState(null);
+    const [events, setEvents] = React.useState([]);
+    const [preferredEvents, setPreferredEvents] = React.useState([]);
 
 
     React.useEffect(() => {
-        setEvents("card.png");
+    setEvents([
+      { image: "/concert.png", type: "concert", day: "m", price: 120 },
+      { image: "/dance.png", type: "dance", day: "t", price: 45 },
+      { image: "/play.png", type: "play", day: "w", price: 60 },
+      { image: "/concert.png", type: "concert", day: "th", price: 80 },
+      { image: "/dance.png", type: "dance", day: "f", price: 30 },
+      { image: "/play.png", type: "play", day: "s", price: 150 },
+      { image: "/concert.png", type: "concert", day: "m", price: 200 },
+      { image: "/dance.png", type: "dance", day: "th", price: 20 },
+      { image: "/play.png", type: "play", day: "f", price: 75 }
+    ]);
+}, []);
+
+    React.useEffect(() => {
+        const preferredTypes = localStorage.getItem("types");
+        const preferredDays = localStorage.getItem("days");
+        const preferredPrice = localStorage.getItem("price");
+        events.forEach((event, index) => {
+            if (preferredTypes.includes(event.type) && preferredDays.includes(event.day) && event.price <= parseInt(preferredPrice)){
+                setPreferredEvents([...preferredEvents, event]);
+            }
+        })
     }, [])
-    
-    React.useEffect(() => {
-        setpreferredEvents(getPreferredEvents);
-    }, [])   
-
-    function getPreferredEvents() {
-        const type = localStorage.getItem('type');
-        const price = localStorage.getItem('price');
-        const day = localStorage.getItem('day');
-        return "card.png";
-    }
     
 
     return (
         <main className="bg-light text-dark">
             <h2>
-                Your Upcoming events - {user}
-            </h2>
-
-            <div className="carousel slide">
-                <div className={`upcoming carousel-item ${slide === 0? 'active' : ''}`}>
-                    <span className="card left-card">
-                        <img src={preferredEvents} width={200} />
-                        <figcaption>Event 1</figcaption>
-                    </span>
-                    <span className="card left-card">
-                        <img src={preferredEvents} width={200} />
-                        <figcaption>Event 2</figcaption>
-                    </span>
-                    <span className="card left-card">
-                        <img src={preferredEvents} width={200} />
-                        <figcaption>Event 3</figcaption>
-                    </span>
-                </div>
-
-                <div className={`upcoming carousel-item ${slide === 1? 'active' : ''}`}>
-                    <span className="card left-card">
-                        <img src={preferredEvents} width={200} />
-                        <figcaption>Event 4</figcaption>
-                    </span>
-                    <span className="card left-card">
-                        <img src={preferredEvents} width={200} />
-                        <figcaption>Event 5</figcaption>
-                    </span>
-                    <span className="card left-card">
-                        <img src={preferredEvents} width={200} />
-                        <figcaption>Event 6</figcaption>
-                    </span>
-                </div>
-
-                <div className={`upcoming carousel-item ${slide === 2? 'active' : ''}`}>
-                    <span className="card left-card">
-                        <img src={preferredEvents} width={200} />
-                        <figcaption>Event 7</figcaption>
-                    </span>
-                    <span className="card left-card">
-                        <img src={preferredEvents} width={200} />
-                        <figcaption>Event 8</figcaption>
-                    </span>
-                    <span className="card left-card">
-                        <img src={preferredEvents} width={200} />
-                        <figcaption>Event 9</figcaption>
-                    </span>
-                </div>
-
-                <button onClick = {() => setSlide((slide === 0? 2 : slide-1))} className="carousel-control-prev carousel-control-prev-icon"/>
-                <button onClick = {() => setSlide((slide === 2? 0 : slide+1))} className="carousel-control-next carousel-control-next-icon"/>
-
-            </div>
-
-            <hr/>
-            <hr/>
-
-
-            <h2>
                 Browse Events
             </h2>
 
             <div className="carousel slide">
-                <div className={`upcoming carousel-item ${slide2 === 0? 'active' : ''}`}>
-                    <span className="card left-card">
-                        <img src={events} width={200} />
-                        <figcaption>Event 1</figcaption>
-                    </span>
-                    <span className="card left-card">
-                        <img src={events} width={200} />
-                        <figcaption>Event 2</figcaption>
-                    </span>
-                    <span className="card left-card">
-                        <img src={events} width={200} />
-                        <figcaption>Event 3</figcaption>
-                    </span>
+                <div className= "carousel-inner">
+                    <div className='upcoming carousel-item active'>
+                        {preferredEvents.map((event, index) => (
+                            event.image &&(
+                            <span className="card left-card">
+                                <img src={event.image} width={200} />
+                                <figcaption>{event.day} ${event.price}</figcaption>
+                            </span>
+                            )
+                        ))}
+                    </div>
                 </div>
 
-                <div className={`upcoming carousel-item ${slide2 === 1? 'active' : ''}`}>
+                {/* <div className={`upcoming carousel-item ${slide2 === 1? 'active' : ''}`}>
                     <span className="card left-card">
-                        <img src={events} width={200} />
-                        <figcaption>Event 4</figcaption>
+                        <img src={preferredEvents[0].image} width={200} />
+                        <figcaption>{preferredEvents[0].day} ${preferredEvents[0].price}</figcaption>
                     </span>
                     <span className="card left-card">
-                        <img src={events} width={200} />
-                        <figcaption>Event 5</figcaption>
+                        <img src={preferredEvents[0].image} width={200} />
+                        <figcaption>{preferredEvents[0].day} ${preferredEvents[0].price}</figcaption>
                     </span>
                     <span className="card left-card">
-                        <img src={events} width={200} />
-                        <figcaption>Event 6</figcaption>
+                        <img src={preferredEvents[0].image} width={200} />
+                        <figcaption>{preferredEvents[0].day} ${preferredEvents[0].price}</figcaption>
                     </span>
                 </div>
 
                 <div className={`upcoming carousel-item ${slide2 === 2? 'active' : ''}`}>
                     <span className="card left-card">
-                        <img src={events} width={200} />
-                        <figcaption>Event 7</figcaption>
+                        <img src={preferredEvents[0].image} width={200} />
+                        <figcaption>{preferredEvents[0].day} ${preferredEvents[0].price}</figcaption>
                     </span>
                     <span className="card left-card">
-                        <img src={events} width={200} />
-                        <figcaption>Event 8</figcaption>
+                        <img src={preferredEvents[0].image} width={200} />
+                        <figcaption>{preferredEvents[0].day} ${preferredEvents[0].price}</figcaption>
                     </span>
                     <span className="card left-card">
-                        <img src={events} width={200} />
-                        <figcaption>Event 9</figcaption>
+                        <img src={preferredEvents[0].image} width={200} />
+                        <figcaption>{preferredEvents[0].day} ${preferredEvents[0].price}</figcaption>
                     </span>
-                </div>
+                </div> */}
 
                 {pop && <div className="position-fixed top-0 end-0 alert alert-success m-3">
                     {pop}
                 </div>}
 
-                <button onClick = {() => setSlide2(slide2 === 0? 2 : slide2-1)} className="carousel-control-prev carousel-control-prev-icon"/>
-                <button onClick = {() => setSlide2(slide2 === 2? 0 : slide2+1)} className="carousel-control-next carousel-control-next-icon"/>
+                <button onClick = {() => setSlide2(slide2 === 0? 2 : slide2-1)} className="carousel-control-prev carousel-control-prev-icon"></button>
+                <button onClick = {() => setSlide2(slide2 === 2? 0 : slide2+1)} className="carousel-control-next carousel-control-next-icon"></button>
 
             </div>
             
