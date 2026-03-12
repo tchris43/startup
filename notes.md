@@ -46,7 +46,7 @@ span lets you put elements side by side
 -it just deletes what is there and copies the new stuff to the server
 -h is the url -s is which one to update
 
-make sure to deploy with this: ./deployFiles.sh -k ~/OneDrive/Desktop/cs260/pasukon_kagi.pem -h nextevent.click -s simon
+make sure to deploy with this: ./deployFiles.sh -k ~/OneDrive/Desktop/cs260/pasukon_kagi.pem -h nextevent
 and be sure that you are in the directory of the file you are trying to deploy.
 
 Also make sure you have saved the deployment file or nothing may happen.

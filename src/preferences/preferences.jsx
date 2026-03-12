@@ -20,7 +20,7 @@ export function Preferences({user}) {
         localStorage.setItem('days', JSON.stringify(eventDays));
     }, [eventDays]);
 
-
+    
 
 
     function handleTypeChange(e){

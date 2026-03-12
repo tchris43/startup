@@ -17,6 +17,8 @@ export function Discover({ user }) {
         }, 5000);
     }, [])
 
+    //Don't forget to update preferredEvents functionality
+
 
     const [slide, setSlide] = React.useState(0);
     const [slide2, setSlide2] = React.useState(0);
@@ -62,7 +64,7 @@ export function Discover({ user }) {
             <div className="carousel slide">
                 <div className= "carousel-inner">
                     <div className='upcoming carousel-item active'>
-                        {preferredEvents.map((event, index) => (
+                        {preferredEvents.map((event) => (
                             event.image &&(
                             <span className="card left-card">
                                 <img src={event.image} width={200} />
