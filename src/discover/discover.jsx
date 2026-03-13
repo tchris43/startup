@@ -56,6 +56,9 @@ export function Discover({ user }) {
         return typeMatch && dayMatch && priceMatch;
     });
 
+    const [currentIndex, setCurrentIndex] = React.useState(0);
+
+    
 
     return (
         <main className="bg-light text-dark">
@@ -65,10 +68,12 @@ export function Discover({ user }) {
 
             {preferredEvents.length > 0 && (
                 <span className="card left-card">
-                    <img src={preferredEvents[0].image} width={200} />
-                    <figcaption>{preferredEvents[0].day} ${preferredEvents[0].price}</figcaption>
+                    <img src={preferredEvents[currentIndex].image} width={200} />
+                    <figcaption>{preferredEvents[currentIndex].day} ${preferredEvents[currentIndex].price}</figcaption>
                 </span>
             )}
+
+            <button onClick={() => setCurrentIndex(currentIndex+1)}>Next</button>
 
 
             {pop && <div className="position-fixed top-0 end-0 alert alert-success m-3">
