@@ -29,29 +29,29 @@ export function Discover({ user }) {
 
     React.useEffect(() => {
         setEvents([
-            { image: "/concert.png", type: "concert", day: "m", price: 120 },
-            { image: "/dance.png", type: "dance", day: "t", price: 45 },
-            { image: "/play.png", type: "play", day: "w", price: 60 },
-            { image: "/concert.png", type: "concert", day: "th", price: 80 },
-            { image: "/dance.png", type: "dance", day: "f", price: 30 },
-            { image: "/play.png", type: "play", day: "s", price: 150 },
-            { image: "/concert.png", type: "concert", day: "m", price: 200 },
-            { image: "/dance.png", type: "dance", day: "th", price: 20 },
-            { image: "/play.png", type: "play", day: "f", price: 75 }
+            { image: "/concert.png", type: "concerts", day: "m", price: 120 },
+            { image: "/dance.png", type: "dances", day: "t", price: 45 },
+            { image: "/play.png", type: "plays", day: "w", price: 60 },
+            { image: "/concert.png", type: "concerts", day: "th", price: 80 },
+            { image: "/dance.png", type: "dances", day: "f", price: 30 },
+            { image: "/play.png", type: "plays", day: "s", price: 150 },
+            { image: "/concert.png", type: "concerts", day: "m", price: 200 },
+            { image: "/dance.png", type: "dances", day: "th", price: 20 },
+            { image: "/play.png", type: "plays", day: "f", price: 75 }
         ]);
     }, []);
 
 
 
-    const preferredTypes = localStorage.getItem("types");
-    const preferredDays = localStorage.getItem("days");
-    const preferredPrice = localStorage.getItem("price");
+    const preferredTypes = JSON.parse(localStorage.getItem("types") || "[]");
+    const preferredDays = JSON.parse(localStorage.getItem("days") || "[]");
+    const preferredPrice = parseInt(localStorage.getItem("price"));
 
 
     const preferredEvents = events.filter((event) => {
         const typeMatch = preferredTypes.length == 0 || preferredTypes.includes(event.type);
         const dayMatch = preferredDays.length == 0 || preferredDays.includes(event.day);
-        const priceMatch = preferredPrice.length == 0 || preferredPrice.includes(event.price);
+        const priceMatch = isNaN(preferredPrice) || event.price <= preferredPrice;
         
         return typeMatch && dayMatch && priceMatch;
     });
@@ -73,6 +73,7 @@ export function Discover({ user }) {
                 Browse Events
             </h2>
 
+            {preferredEvents.length === 0 && <div>No events match your preferences.</div>}
             {preferredEvents.length > 0 && (
                 <span className="card left-card">
                     <img src={preferredEvents[currentIndex].image} width={200} />
