@@ -19,10 +19,23 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(`/api`, apiRouter);
 
-
-app.get(/.*/, (_req, res) => {
-    res.send({msg: "service message"});
+apiRouter.post('/auth', async (req, res) => {
+    res.send({ email: 'taylor@gmail.com' });
 });
+
+apiRouter.put('/auth', async(req,res) => {
+    res.send({ email: 'taylor@gmail.com' });
+})
+
+apiRouter.delete('/auth', async (req, res) => {
+    res.send({});
+})
+
+apiRouter.get('/user', async(req,res) => {
+    res.send({ email: 'taylor@gmail.com' });
+})
+
+
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
