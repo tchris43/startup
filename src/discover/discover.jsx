@@ -59,7 +59,7 @@ export function Discover({ user }) {
     const [currentIndex, setCurrentIndex] = React.useState(0);
 
     function getNextEvent(){
-        if (currentIndex < prefferedEvents.length){
+        if (currentIndex < preferredEvents.length-1){
             setCurrentIndex(currentIndex+1);
         }
         else {
