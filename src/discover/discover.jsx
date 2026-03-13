@@ -58,7 +58,14 @@ export function Discover({ user }) {
 
     const [currentIndex, setCurrentIndex] = React.useState(0);
 
-    
+    function getNextEvent(){
+        if (currentIndex < prefferedEvents.length){
+            setCurrentIndex(currentIndex+1);
+        }
+        else {
+            setCurrentIndex(0);
+        }
+    }
 
     return (
         <main className="bg-light text-dark">
@@ -73,7 +80,7 @@ export function Discover({ user }) {
                 </span>
             )}
 
-            <button onClick={() => setCurrentIndex(currentIndex+1)}>Next</button>
+            <button onClick={() => getNextEvent()}>Next</button>
 
 
             {pop && <div className="position-fixed top-0 end-0 alert alert-success m-3">
