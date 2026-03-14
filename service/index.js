@@ -73,8 +73,19 @@ apiRouter.put('/auth', async(req,res) => {
 })
 
 apiRouter.delete('/auth', async (req, res) => {
+    const token = req.cookies['token'];
+    const user = await getUser('token', token);
+    if (user) {
+        clearAuthCookie(res, user);
+    }
+
     res.send({});
-})
+});
+
+function clearAuthCookie(res, user) {
+    delete user.token;
+    res.clearCookie('token');
+}
 
 apiRouter.get('/user', async(req,res) => {
     res.send({ email: 'taylor@gmail.com' });
