@@ -15,7 +15,9 @@ let apiRouter = express.Router();
 const port = process.argv.length > 2 ?
 process.argv[2] : 3000;
 
+const cors = require('cors');
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(`/api`, apiRouter);
