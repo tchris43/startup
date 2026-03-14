@@ -19,8 +19,21 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(`/api`, apiRouter);
 
+async function createUser(email, password){
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    const user = {
+        email: email,
+        password: passwordHash,
+    };
+
+    users.push(user);
+
+    return user;
+}
+
 apiRouter.post('/auth', async (req, res) => {
-    res.send({ email: 'taylor@gmail.com' });
+    res.send(req.body);
 });
 
 apiRouter.put('/auth', async(req,res) => {
