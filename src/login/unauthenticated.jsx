@@ -7,12 +7,26 @@ export function Unauthenticated({user, onLogin}) {
   const [password, setPassword] = React.useState('');
 
   function loginUser() {
-    localStorage.setItem('user', userName);
-    onLogin(userName);
+    createAuth('PUT');
   }
 
   function createUser() {
-    loginUser();
+    createAuth('POST');
+  }
+
+  async function createAuth(method) {
+    localStorage.setItem('user', user);
+    const res = await fetch('api/auth', {
+      method: method,
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email, password}),
+    });
+    await res.json();
+    if (res.ok){
+      navigate('/discover');
+    } else {
+      alert('Authentication failed');
+    }
   }
 
 
