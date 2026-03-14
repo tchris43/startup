@@ -5,8 +5,16 @@ export function Authenticated({user, onLogout}) {
   const navigate = useNavigate();
 
   function logout() {
-    localStorage.removeItem('user');
-    onLogout();
+    fetch(`/api/auth/logout`, {
+      method: 'delete',
+    })
+    .catch(() => {
+
+    })
+    .finally(() => {
+      localStorage.removeItem('user');
+      onLogout();
+    })
   }
 
   return (

@@ -15,7 +15,6 @@ export function Unauthenticated({user, onLogin}) {
   }
 
   async function createAuth(method) {
-    localStorage.setItem('user', user);
     const res = await fetch('http://localhost:3000/api/auth', {
       method: method,
       headers: {'Content-Type': 'application/json'},
@@ -23,6 +22,7 @@ export function Unauthenticated({user, onLogin}) {
     });
     await res.json();
     if (res.ok){
+      localStorage.setItem('user', user);
       navigate('/discover');
     } else {
       alert('Authentication failed');
