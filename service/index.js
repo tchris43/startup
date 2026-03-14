@@ -39,8 +39,23 @@ function getUser(field, value){
     return null;
 }
 
+function setAuthCookie(res, user) {
+    user.token = uuid.v4();
+
+    res.cookie('token', user.token, {
+        secure: true,
+        httpOnly: true,
+        sameSite: 'strict',
+    });
+}
+
 apiRouter.post('/auth', async (req, res) => {
-    res.send(req.body);
+    if (await getUser('email', req.body.email)) {
+        res.status(409).send({msg: 'Existing user'});
+    } else {
+        const user = await createUser(req.body.email, req.body.password);
+        res.send({email : user.email});
+    }
 });
 
 apiRouter.put('/auth', async(req,res) => {
