@@ -62,7 +62,14 @@ apiRouter.post('/auth', async (req, res) => {
 });
 
 apiRouter.put('/auth', async(req,res) => {
-    res.send({ email: 'taylor@gmail.com' });
+    const user = await getUser('email', req.body.email);
+    if (user && (await bcrypt.compare(req.body.password, user.password))) {
+        setAuthCookie(res, user);
+
+        res.send({ email: user.email});
+    } else {
+        res.status(401).send({msg: 'Unauthorized'});
+    }
 })
 
 apiRouter.delete('/auth', async (req, res) => {
