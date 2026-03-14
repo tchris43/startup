@@ -32,6 +32,13 @@ async function createUser(email, password){
     return user;
 }
 
+function getUser(field, value){
+    if (value) {
+        return users.find((user) => user[field] === value);
+    }
+    return null;
+}
+
 apiRouter.post('/auth', async (req, res) => {
     res.send(req.body);
 });
