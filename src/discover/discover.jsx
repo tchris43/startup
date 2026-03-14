@@ -26,6 +26,16 @@ export function Discover({ user }) {
     const [events, setEvents] = React.useState([]);
     
 
+    //This is an API placeholder. The variables are not yet instantiated
+    React.useEffect(() => {
+        fetch(eventsAPI)
+        .then((response) => response.json())
+        .then((data) => {
+           setEvents(data.events)
+        })
+        .catch();
+    }, [])
+
 
     React.useEffect(() => {
         setEvents([
