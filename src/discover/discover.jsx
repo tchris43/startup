@@ -28,12 +28,14 @@ export function Discover({ user }) {
 
     //This is an API placeholder. The variables are not yet instantiated
     React.useEffect(() => {
-        fetch(eventsAPI)
+        fetch("https://app.ticketmaster.com/discovery/v2/events.json?apikey=GRGAmTWkOolvR63LJvSsnshUlS48au9A")
         .then((response) => response.json())
         .then((data) => {
-           setEvents(data.events)
+            console.log(data);
         })
-        .catch();
+        .catch((error) => {
+            console.log("Error fetching events: ", error);
+        });
     }, [])
 
 

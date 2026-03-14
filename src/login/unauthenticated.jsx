@@ -16,10 +16,10 @@ export function Unauthenticated({user, onLogin}) {
 
   async function createAuth(method) {
     localStorage.setItem('user', user);
-    const res = await fetch('api/auth', {
+    const res = await fetch('http://localhost:3000/api/auth', {
       method: method,
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({email, password}),
+      body: JSON.stringify({userName, password}),
     });
     await res.json();
     if (res.ok){
