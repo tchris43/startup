@@ -88,7 +88,13 @@ function clearAuthCookie(res, user) {
 }
 
 apiRouter.get('/user', async(req,res) => {
-    res.send({ email: 'taylor@gmail.com' });
+    const token = req.cookies['token'];
+    const user = await getUser('token', token);
+    if (user) {
+        res.send({email : user.email});
+    } else {
+        res.status(401).send({msg : 'Unauthorized'});
+    }
 })
 
 
