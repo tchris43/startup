@@ -90,6 +90,18 @@ function clearAuthCookie(res, user) {
     res.clearCookie('token');
 }
 
+function verifyAuth(req, res, next){
+    const user = getUser("token", req.cookies[authCookieName]);
+    if (user){
+        next();
+    }
+    else {
+        res.status(401).message({msg: "Error: Unauthorized"});
+    }
+};
+
+
+
 
 
 
