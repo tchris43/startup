@@ -100,7 +100,24 @@ function verifyAuth(req, res, next){
     }
 };
 
+preferences = [];
 
+//TODO: figure out how to access this from frontend
+//TODO: figure out why there is _req
+apiRouter.post('/savePref', verifyAuth, (_req, res)){
+    //TODO: figure out why I have to rename preferences
+    preferences = savePreferences(req.body);
+    res.send(preferences);
+}
+
+apiRouter.post('/getPref', verifyAuth, (req,res)){
+    res.send(preferences);
+}
+
+function savePreferences(newPreferenceList){
+    //TODO: Make this an actual preference list that is helpful
+    return newPreferenceList;
+}
 
 
 
