@@ -78,16 +78,24 @@ export function Preferences({user}) {
                 <fieldset>
                     <legend>Select your preferences</legend>
                     <div>
-                        <input type="checkbox" id = "concerts" name = "interests" value = "concerts" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("concerts")}/>
-                        <label for = "concerts">Concerts</label>
+                        <input type="checkbox" id = "Sports" name = "interests" value = "Sports" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Sports")}/>
+                        <label for = "Sports">Sports</label>
                     </div>
                     <div>
-                        <input type="checkbox" id = "dances" name = "interests" value = "dances" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("dances")} />
-                        <label for = "dances">Dances</label>
+                        <input type="checkbox" id = "Music" name = "interests" value = "Music" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Music")} />
+                        <label for = "Music">Music</label>
                     </div>
                     <div>
-                        <input type="checkbox" id = "plays" name = "interests" value = "plays" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("plays")} />
-                        <label for = "plays">Plays</label>
+                        <input type="checkbox" id = "Arts" name = "interests" value = "Arts & Theatre" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Arts")} />
+                        <label for = "Arts">Arts & Theatre</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id = "Film" name = "interests" value = "Film" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Film")} />
+                        <label for = "Film">Film</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id = "Misc" name = "interests" value = "Misc" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Misc")} />
+                        <label for = "Misc">Miscellaneous</label>
                     </div>
 
 
