@@ -9,7 +9,6 @@ export function Preferences({user}) {
     const navigate = useNavigate();
 
     const [eventTypes, setEventTypes] = React.useState(() => JSON.parse(localStorage.getItem('types') || []));
-    const [eventPrice, setEventPrice] = React.useState(() => JSON.parse(localStorage.getItem('price') || null));
     const [eventDays, setEventDays] = React.useState(() => JSON.parse(localStorage.getItem('days') || []));
 
     React.useEffect(() => {
@@ -48,16 +47,11 @@ export function Preferences({user}) {
         localStorage.setItem('days', JSON.stringify(eventDays));
     }
 
-    function handlePriceChange(e){
-        setEventPrice(e.target.value);
-        localStorage.setItem('price', e.target.value);
-    }
     
     //TODO: verify dict created correctly
     const preferences = {
         types: eventTypes,
-        days: eventDays,
-        price: eventPrice
+        days: eventDays
     }
 
     
@@ -96,18 +90,6 @@ export function Preferences({user}) {
                         <label for = "plays">Plays</label>
                     </div>
 
-                    <div>
-                        <label for = "price">Select price range</label>
-                        <select id="price" name ="price" onChange={(e) => handlePriceChange(e)}>
-                            <option value="15">$0-$15</option>
-                            <option value="30">$0-$30</option>
-                            <option value="45">$0-$45</option>
-                            <option value="60">$0-$60</option>
-                            <option value="80">$0-$80</option>
-                            <option value="100">$0-$100</option>
-                            <option value="200">$0-200</option>
-                        </select>
-                    </div>
 
                     <legend>Days of the week</legend>
                     <div>

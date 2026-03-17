@@ -28,7 +28,6 @@ export function Discover({ user }) {
 
     const [preferredTypes, setTypes] = React.useState([]);
     const [preferredDays, setDays] = React.useState([]);
-    const [preferredPrice, setPrice] = React.useState(0);
 
     
 
@@ -40,24 +39,45 @@ export function Discover({ user }) {
         .then((data) => {
             console.log("got the response!");
             console.log(data._embedded.events);
+            parseResponse(data);
         })
         .catch((error) => {
             console.log("Error fetching events: ", error);
         });
     }, [])
 
+    //TODO: verify this is implemented correctly
+    function toWeekday(dateTime){
+        const days = ['m', 't', 'w', 'th', 'f', 's', 's'];
+        const date = new Date(dateTime);
+        const dayIndex = date.getDay();
+        return days[dayIndex];
+    }
+
+
+    function parseResponse(res){
+        const eventList = res._embedded.events;
+        let parsedEvents = [];
+        for (let event of res){
+            //TODO: change the types to what actually exists
+            let type = event.type;
+            let day =  toWeekday(event.dates.start.localDate);
+            //TODO: verify I correctly removed price everywhere
+        }
+    }
+
 
     React.useEffect(() => {
         setEvents([
-            { image: "/concert.png", type: "concerts", day: "m", price: 120 },
-            { image: "/dance.png", type: "dances", day: "t", price: 45 },
-            { image: "/play.png", type: "plays", day: "w", price: 60 },
-            { image: "/concert.png", type: "concerts", day: "th", price: 80 },
-            { image: "/dance.png", type: "dances", day: "f", price: 30 },
-            { image: "/play.png", type: "plays", day: "s", price: 150 },
-            { image: "/concert.png", type: "concerts", day: "m", price: 200 },
-            { image: "/dance.png", type: "dances", day: "th", price: 20 },
-            { image: "/play.png", type: "plays", day: "f", price: 75 }
+            { image: "/concert.png", type: "concerts", day: "m"},
+            { image: "/dance.png", type: "dances", day: "t"},
+            { image: "/play.png", type: "plays", day: "w"},
+            { image: "/concert.png", type: "concerts", day: "th"},
+            { image: "/dance.png", type: "dances", day: "f"},
+            { image: "/play.png", type: "plays", day: "s"},
+            { image: "/concert.png", type: "concerts", day: "m"},
+            { image: "/dance.png", type: "dances", day: "th"},
+            { image: "/play.png", type: "plays", day: "f" }
         ]);
     }, []);
 
@@ -68,7 +88,7 @@ export function Discover({ user }) {
     // const preferredPrice = parseInt(localStorage.getItem("price"));
 
 
-    //TODO: Fix the backend to be a map for each cat
+    //TODO: Verify it correctly accesses the dict in the backend
 
     React.useEffect(() => {
         fetch("/api/getPref")
@@ -76,7 +96,6 @@ export function Discover({ user }) {
         .then((preferences) => {
             setTypes(preferences.types);
             setDays(preferences.days);
-            setPrice(preferences.price);
         })
     })
 
@@ -86,9 +105,8 @@ export function Discover({ user }) {
     const preferredEvents = events.filter((event) => {
         const typeMatch = preferredTypes.length == 0 || preferredTypes.includes(event.type);
         const dayMatch = preferredDays.length == 0 || preferredDays.includes(event.day);
-        const priceMatch = isNaN(preferredPrice) || event.price <= preferredPrice;
         
-        return typeMatch && dayMatch && priceMatch;
+        return typeMatch && dayMatch;
     });
 
     const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -111,8 +129,8 @@ export function Discover({ user }) {
             {preferredEvents.length === 0 && <div>No events match your preferences.</div>}
             {preferredEvents.length > 0 && (
                 <span className="card left-card">
-                    <img src={preferredEvents[currentIndex].image} width={200} />
-                    <figcaption>{preferredEvents[currentIndex].day} ${preferredEvents[currentIndex].price}</figcaption>
+                    <img src={'/card.png'} width={200} />
+                    <figcaption>{preferredEvents[currentIndex].day} </figcaption>
                 </span>
             )}
 
