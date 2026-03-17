@@ -48,30 +48,28 @@ export function Preferences({user}) {
     }
 
     
-    //TODO: verify dict created correctly
-    const preferences = {
-        types: eventTypes,
-        days: eventDays
-    }
+    
 
     
 
-    //TODO: Verify this correctly calls the endpoint
+
     async function save(){
-        const res = fetch('/api/getPref', {
-            //TODO: verify it is UPDATE
-            method: UPDATE,
+        const preferences = {
+            types: eventTypes,
+            days: eventDays
+        };
+        const res = fetch('/api/savePref', {
+            method: 'post',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(preferences)
         });
         await res.json();
-        //TODO: verify I don't need local storage
         if (!res.ok){
             alert('Save Failed');
         }
         navigate('/discover');
     }
-//TODO: Double check I changed the types in the other places necessary
+
   return (
     <main class="bg-light text-dark">
             <form method = "get">

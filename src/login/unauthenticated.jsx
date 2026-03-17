@@ -14,7 +14,7 @@ export function Unauthenticated({user, onLogin}) {
     createAuth('/api/auth/create');
   }
 
-  //TODO: change methods to post
+
   async function createAuth(endpoint) {
     const res = await fetch(endpoint, {
       method: 'post',

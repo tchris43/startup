@@ -31,7 +31,6 @@ export function Discover({ user }) {
 
     
 
-    //TODO: Actually do something with this
     React.useEffect(() => {
         console.log("Fetching the API");
         fetch("https://app.ticketmaster.com/discovery/v2/events.json?apikey=GRGAmTWkOolvR63LJvSsnshUlS48au9A")
@@ -46,9 +45,8 @@ export function Discover({ user }) {
         });
     }, [])
 
-    //TODO: verify this is implemented correctly
     function toWeekday(dateTime){
-        const days = ['m', 't', 'w', 'th', 'f', 's', 's'];
+        const days = ['m', 't', 'w', 'th', 'f', 's', 'su'];
         const date = new Date(dateTime);
         const dayIndex = date.getDay();
         return days[dayIndex];
@@ -59,11 +57,8 @@ export function Discover({ user }) {
         const eventList = res._embedded.events;
         let parsedEvents = [];
         for (let event of res){
-            //TODO: change the types to what actually exists
             let type = event.type;
             let day =  toWeekday(event.dates.start.localDate);
-            //TODO: verify I correctly removed price everywhere
-            //TODO: verify I have correctly built the event object
             parsedEvents.push({
                 type: type,
                 day: day
@@ -74,29 +69,6 @@ export function Discover({ user }) {
         
     }
 
-
-    React.useEffect(() => {
-        setEvents([
-            { image: "/concert.png", type: "concerts", day: "m"},
-            { image: "/dance.png", type: "dances", day: "t"},
-            { image: "/play.png", type: "plays", day: "w"},
-            { image: "/concert.png", type: "concerts", day: "th"},
-            { image: "/dance.png", type: "dances", day: "f"},
-            { image: "/play.png", type: "plays", day: "s"},
-            { image: "/concert.png", type: "concerts", day: "m"},
-            { image: "/dance.png", type: "dances", day: "th"},
-            { image: "/play.png", type: "plays", day: "f" }
-        ]);
-    }, []);
-
-
-
-    // const preferredTypes = JSON.parse(localStorage.getItem("types") || "[]");
-    // const preferredDays = JSON.parse(localStorage.getItem("days") || "[]");
-    // const preferredPrice = parseInt(localStorage.getItem("price"));
-
-
-    //TODO: Verify it correctly accesses the dict in the backend
 
     React.useEffect(() => {
         fetch("/api/getPref")

@@ -8,7 +8,6 @@ const uuid = require('uuid');
 const authCookieName = "token";
 
 let users = [];
-let preferences = [];
 
 let apiRouter = express.Router();
 
@@ -103,23 +102,22 @@ function verifyAuth(req, res, next){
     }
 };
 
-preferences = [];
 
-//TODO: verify I have actually done these endpoints right (with a map of preferences)
-//TODO: verify I am correctly calling from the frontend (preferences) and that it should be update, not post
-apiRouter.update('/savePref', verifyAuth, (_req, res)){
-    preferences = savePreferences(_req.body);
-    res.send(preferences);
-}
+let preferences = {};
 
-apiRouter.get('/getPref', verifyAuth, (req,res)){
-    res.send(preferences);
-}
 
-function savePreferences(newPreferenceDictionary){
-    //TODO: verify I don't need to do anything else. (Do I even need this function?)
-    return newPreferenceDictionary;
-}
+apiRouter.post('/savePref', verifyAuth, (_req, res) => {
+    const user = getUser("token", _req.cookies[authCookieName]);
+    preferences[user.email] = _req.body;
+    res.send(_req.body);
+});
+
+apiRouter.get('/getPref', verifyAuth, (req,res) => {
+    const user = getUser("token", req.cookies[authCookieName]);
+    res.send(preferences[user]);
+});
+
+
 
 
 
