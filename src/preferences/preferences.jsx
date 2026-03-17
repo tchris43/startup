@@ -71,7 +71,7 @@ export function Preferences({user}) {
         }
         navigate('/discover');
     }
-
+//TODO: Double check I changed the types in the other places necessary
   return (
     <main class="bg-light text-dark">
             <form method = "get">

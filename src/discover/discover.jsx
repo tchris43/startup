@@ -63,7 +63,15 @@ export function Discover({ user }) {
             let type = event.type;
             let day =  toWeekday(event.dates.start.localDate);
             //TODO: verify I correctly removed price everywhere
+            //TODO: verify I have correctly built the event object
+            parsedEvents.push({
+                type: type,
+                day: day
+            });
         }
+        setEvents(parsedEvents);
+       
+        
     }
 
 
