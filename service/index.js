@@ -13,13 +13,14 @@ let preferences = [];
 let apiRouter = express.Router();
 
 const port = process.argv.length > 2 ?
-process.argv[2] : 3000;
+process.argv[2] : 4000;
 
 const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static('public'));
 app.use(`/api`, apiRouter);
 
 async function createUser(email, password){
@@ -52,7 +53,9 @@ function setAuthCookie(res, user) {
     });
 }
 
-apiRouter.post('/auth', async (req, res) => {
+
+//Verify Auth endpoints are right for auth
+apiRouter.post('/auth/create', async (req, res) => {
     if (await getUser('email', req.body.email)) {
         res.status(409).send({msg: 'Existing user'});
     } else {
@@ -64,7 +67,7 @@ apiRouter.post('/auth', async (req, res) => {
     }
 });
 
-apiRouter.put('/auth', async(req,res) => {
+apiRouter.put('/auth/login', async(req,res) => {
     const user = await getUser('email', req.body.email);
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
         setAuthCookie(res, user);
@@ -75,7 +78,7 @@ apiRouter.put('/auth', async(req,res) => {
     }
 })
 
-apiRouter.delete('/auth', async (req, res) => {
+apiRouter.delete('/auth/logout', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
     if (user) {
@@ -102,21 +105,20 @@ function verifyAuth(req, res, next){
 
 preferences = [];
 
-//TODO: figure out how to access this from frontend
-//TODO: figure out why there is _req
+//TODO: verify I have actually done these endpoints right (with a map of preferences)
+//TODO: verify I am correctly calling from the frontend
 apiRouter.post('/savePref', verifyAuth, (_req, res)){
-    //TODO: figure out why I have to rename preferences
-    preferences = savePreferences(req.body);
+    preferences = savePreferences(_req.body);
     res.send(preferences);
 }
 
-apiRouter.post('/getPref', verifyAuth, (req,res)){
+apiRouter.get('/getPref', verifyAuth, (req,res)){
     res.send(preferences);
 }
 
-function savePreferences(newPreferenceList){
+function savePreferences(newPreferenceDictionary){
     //TODO: Make this an actual preference list that is helpful
-    return newPreferenceList;
+    return newPreferenceDictionary;
 }
 
 

@@ -24,9 +24,15 @@ export function Discover({ user }) {
     const [invite, setInvite] = React.useState(null);
 
     const [events, setEvents] = React.useState([]);
+
+
+    const [preferredTypes, setTypes] = React.useState([]);
+    const [preferredDays, setDays] = React.useState([]);
+    const [preferredPrice, setPrice] = React.useState(0);
+
     
 
-    //This is an API placeholder. The variables are not yet instantiated
+    //TODO: Actually do something with this
     React.useEffect(() => {
         console.log("Fetching the API");
         fetch("https://app.ticketmaster.com/discovery/v2/events.json?apikey=GRGAmTWkOolvR63LJvSsnshUlS48au9A")
@@ -57,9 +63,24 @@ export function Discover({ user }) {
 
 
 
-    const preferredTypes = JSON.parse(localStorage.getItem("types") || "[]");
-    const preferredDays = JSON.parse(localStorage.getItem("days") || "[]");
-    const preferredPrice = parseInt(localStorage.getItem("price"));
+    // const preferredTypes = JSON.parse(localStorage.getItem("types") || "[]");
+    // const preferredDays = JSON.parse(localStorage.getItem("days") || "[]");
+    // const preferredPrice = parseInt(localStorage.getItem("price"));
+
+
+    //TODO: Fix the backend to be a map for each cat
+
+    React.useEffect(() => {
+        fetch("/api/getPref")
+        .then((response) => response.json())
+        .then((preferences) => {
+            setTypes(preferences.types);
+            setDays(preferences.days);
+            setPrice(preferences.price);
+        })
+    })
+
+   
 
 
     const preferredEvents = events.filter((event) => {

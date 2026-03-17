@@ -15,7 +15,7 @@ export function Unauthenticated({user, onLogin}) {
   }
 
   async function createAuth(method) {
-    const res = await fetch('http://localhost:3000/api/auth', {
+    const res = await fetch('/api/auth', {
       method: method,
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({userName, password}),
