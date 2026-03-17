@@ -7,16 +7,17 @@ export function Unauthenticated({user, onLogin}) {
   const [password, setPassword] = React.useState('');
 
   function loginUser() {
-    createAuth('PUT');
+    createAuth('/api/auth/login');
   }
 
   function createUser() {
-    createAuth('POST');
+    createAuth('/api/auth/create');
   }
 
-  async function createAuth(method) {
-    const res = await fetch('/api/auth', {
-      method: method,
+  //TODO: change methods to post
+  async function createAuth(endpoint) {
+    const res = await fetch(endpoint, {
+      method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({userName, password}),
     });

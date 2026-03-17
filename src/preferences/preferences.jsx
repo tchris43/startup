@@ -52,6 +52,27 @@ export function Preferences({user}) {
         setEventPrice(e.target.value);
         localStorage.setItem('price', e.target.value);
     }
+    
+
+
+
+    
+
+    //TODO: Verify this correctly calls the endpoint
+    async function save(){
+        const res = fetch('/api/getPref', {
+            //TODO: verify it is UPDATE
+            method: UPDATE,
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify({},)
+        });
+        await res.json();
+        //TODO: verify I don't need local storage
+        if (!res.ok){
+            alert('Save Failed');
+        }
+        navigate('/discover');
+    }
 
   return (
     <main class="bg-light text-dark">
@@ -110,7 +131,7 @@ export function Preferences({user}) {
                         <label for = "m">Sat</label>
                     </div>
                 </fieldset>
-                <button onClick = {() => navigate('/discover')}>Save</button>
+                <button onClick = {() => save()}>Save</button>
 
                 
             </form>

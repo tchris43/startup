@@ -67,7 +67,7 @@ apiRouter.post('/auth/create', async (req, res) => {
     }
 });
 
-apiRouter.put('/auth/login', async(req,res) => {
+apiRouter.post('/auth/login', async(req,res) => {
     const user = await getUser('email', req.body.email);
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
         setAuthCookie(res, user);
@@ -106,8 +106,8 @@ function verifyAuth(req, res, next){
 preferences = [];
 
 //TODO: verify I have actually done these endpoints right (with a map of preferences)
-//TODO: verify I am correctly calling from the frontend
-apiRouter.post('/savePref', verifyAuth, (_req, res)){
+//TODO: verify I am correctly calling from the frontend (preferences) and that it should be update, not post
+apiRouter.update('/savePref', verifyAuth, (_req, res)){
     preferences = savePreferences(_req.body);
     res.send(preferences);
 }
@@ -117,7 +117,7 @@ apiRouter.get('/getPref', verifyAuth, (req,res)){
 }
 
 function savePreferences(newPreferenceDictionary){
-    //TODO: Make this an actual preference list that is helpful
+    //TODO: verify I don't need to do anything else. (Do I even need this function?)
     return newPreferenceDictionary;
 }
 
