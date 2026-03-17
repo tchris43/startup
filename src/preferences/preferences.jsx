@@ -53,8 +53,12 @@ export function Preferences({user}) {
         localStorage.setItem('price', e.target.value);
     }
     
-
-
+    //TODO: verify dict created correctly
+    const preferences = {
+        types: eventTypes,
+        days: eventDays,
+        price: eventPrice
+    }
 
     
 
@@ -64,7 +68,7 @@ export function Preferences({user}) {
             //TODO: verify it is UPDATE
             method: UPDATE,
             headers: {'content-type': 'application/json'},
-            body: JSON.stringify({},)
+            body: JSON.stringify(preferences)
         });
         await res.json();
         //TODO: verify I don't need local storage
