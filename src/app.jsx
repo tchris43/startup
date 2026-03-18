@@ -9,7 +9,7 @@ import { Preferences } from './preferences/preferences';
 import { AuthState } from './login/authState';
 
 export default function App() {
-    const [user, setUser] = React.useState(localStorage.getItem('user') || null);
+    const [user, setUser] = React.useState(localStorage.getItem('user') || '');
     const currentAuthState = user ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
 

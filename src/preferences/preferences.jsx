@@ -26,7 +26,7 @@ export function Preferences({user}) {
             setEventTypes(preferences?.types || []);
             setEventDays(preferences?.days || []);
         })
-    })
+    }, [])
 
     
 
