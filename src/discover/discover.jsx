@@ -32,6 +32,14 @@ export function Discover({ user }) {
     
 
     React.useEffect(() => {
+
+        fetch("/api/getPref")
+        .then((response) => response.json())
+        .then((preferences) => {
+            setTypes(preferences.types);
+            setDays(preferences.days);
+        })
+
         console.log("Fetching the API");
         fetch("https://app.ticketmaster.com/discovery/v2/events.json?apikey=GRGAmTWkOolvR63LJvSsnshUlS48au9A")
         .then((response) => response.json())
@@ -56,10 +64,15 @@ export function Discover({ user }) {
     function parseResponse(res){
         const eventList = res._embedded.events;
         let parsedEvents = [];
-        for (let event of res){
-            let type = event.type;
+        for (let event of eventList){
+            //TODO: verify adding name worked
+            let name = event.name;
+            let url = event.url;
+            let type = event.classifications[0].segment.name;
             let day =  toWeekday(event.dates.start.localDate);
             parsedEvents.push({
+                name: name,
+                url: url,
                 type: type,
                 day: day
             });
@@ -68,16 +81,6 @@ export function Discover({ user }) {
        
         
     }
-
-
-    React.useEffect(() => {
-        fetch("/api/getPref")
-        .then((response) => response.json())
-        .then((preferences) => {
-            setTypes(preferences.types);
-            setDays(preferences.days);
-        })
-    })
 
    
 
@@ -109,8 +112,8 @@ export function Discover({ user }) {
             {preferredEvents.length === 0 && <div>No events match your preferences.</div>}
             {preferredEvents.length > 0 && (
                 <span className="card left-card">
-                    <img src={'/card.png'} width={200} />
-                    <figcaption>{preferredEvents[currentIndex].day} </figcaption>
+                    <figcaption>{preferredEvents[currentIndex].name} </figcaption>
+                    <a href= {preferredEvents[currentIndex].url} > Event Link </a>
                 </span>
             )}
 

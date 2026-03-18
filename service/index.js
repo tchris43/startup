@@ -21,6 +21,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
 app.use(`/api`, apiRouter);
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
 
 async function createUser(email, password){
     const passwordHash = await bcrypt.hash(password, 10);
@@ -55,10 +58,10 @@ function setAuthCookie(res, user) {
 
 //Verify Auth endpoints are right for auth
 apiRouter.post('/auth/create', async (req, res) => {
-    if (await getUser('email', req.body.email)) {
+    if (await getUser('email', req.body.userName)) {
         res.status(409).send({msg: 'Existing user'});
     } else {
-        const user = await createUser(req.body.email, req.body.password);
+        const user = await createUser(req.body.userName, req.body.password);
 
         setAuthCookie(res, user);
 
@@ -67,7 +70,7 @@ apiRouter.post('/auth/create', async (req, res) => {
 });
 
 apiRouter.post('/auth/login', async(req,res) => {
-    const user = await getUser('email', req.body.email);
+    const user = await getUser('email', req.body.userName);
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
         setAuthCookie(res, user);
 
@@ -98,7 +101,7 @@ function verifyAuth(req, res, next){
         next();
     }
     else {
-        res.status(401).message({msg: "Error: Unauthorized"});
+        res.status(401).send({msg: "Error: Unauthorized"});
     }
 };
 
@@ -114,7 +117,8 @@ apiRouter.post('/savePref', verifyAuth, (_req, res) => {
 
 apiRouter.get('/getPref', verifyAuth, (req,res) => {
     const user = getUser("token", req.cookies[authCookieName]);
-    res.send(preferences[user]);
+    const data = preferences[user.email];
+    res.send(data);
 });
 
 

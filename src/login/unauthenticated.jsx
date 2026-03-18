@@ -23,6 +23,7 @@ export function Unauthenticated({user, onLogin}) {
     });
     await res.json();
     if (res.ok){
+      onLogin(userName);
       localStorage.setItem('user', user);
       navigate('/discover');
     } else {

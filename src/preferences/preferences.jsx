@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 export function Preferences({user}) {
     const navigate = useNavigate();
 
-    const [eventTypes, setEventTypes] = React.useState(() => JSON.parse(localStorage.getItem('types') || []));
-    const [eventDays, setEventDays] = React.useState(() => JSON.parse(localStorage.getItem('days') || []));
+    const [eventTypes, setEventTypes] = React.useState([]);
+    const [eventDays, setEventDays] = React.useState([]);
 
     React.useEffect(() => {
         localStorage.setItem('types', JSON.stringify(eventTypes));
@@ -18,6 +18,15 @@ export function Preferences({user}) {
     React.useEffect(() => {
         localStorage.setItem('days', JSON.stringify(eventDays));
     }, [eventDays]);
+
+    React.useEffect(() => {
+        fetch('api/getPref')
+        .then(res => res.json())
+        .then(preferences => {
+            setEventTypes(preferences?.types || []);
+            setEventDays(preferences?.days || []);
+        })
+    })
 
     
 
@@ -58,69 +67,65 @@ export function Preferences({user}) {
             types: eventTypes,
             days: eventDays
         };
-        const res = fetch('/api/savePref', {
-            method: 'post',
+        await fetch('/api/savePref', {
+            method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(preferences)
         });
-        await res.json();
-        if (!res.ok){
-            alert('Save Failed');
-        }
-        navigate('/discover');
+
     }
 
   return (
-    <main class="bg-light text-dark">
+    <main className="bg-light text-dark">
             <form method = "get">
                 <fieldset>
                     <legend>Select your preferences</legend>
                     <div>
                         <input type="checkbox" id = "Sports" name = "interests" value = "Sports" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Sports")}/>
-                        <label for = "Sports">Sports</label>
+                        <label htmlFor = "Sports">Sports</label>
                     </div>
                     <div>
                         <input type="checkbox" id = "Music" name = "interests" value = "Music" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Music")} />
-                        <label for = "Music">Music</label>
+                        <label htmlFor = "Music">Music</label>
                     </div>
                     <div>
-                        <input type="checkbox" id = "Arts" name = "interests" value = "Arts & Theatre" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Arts")} />
-                        <label for = "Arts">Arts & Theatre</label>
+                        <input type="checkbox" id = "Arts" name = "interests" value = "Arts" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Arts")} />
+                        <label htmlFor = "Arts">Arts & Theatre</label>
                     </div>
                     <div>
                         <input type="checkbox" id = "Film" name = "interests" value = "Film" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Film")} />
-                        <label for = "Film">Film</label>
+                        <label htmlFor = "Film">Film</label>
                     </div>
                     <div>
                         <input type="checkbox" id = "Misc" name = "interests" value = "Misc" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Misc")} />
-                        <label for = "Misc">Miscellaneous</label>
+                        <label htmlFor = "Misc">Miscellaneous</label>
                     </div>
 
 
                     <legend>Days of the week</legend>
                     <div>
                         <input type="checkbox" id = "m" name = "days" value = "m" onChange={(e) => handleDayChange(e)} checked={eventDays.includes("m")}/>
-                        <label for = "m">Mon</label>
+                        <label htmlFor = "m">Mon</label>
                     </div>
                     <div>
                         <input type="checkbox" id = "t" name = "days" value = "t" onChange={(e) => handleDayChange(e)} checked={eventDays.includes("t")}/>
-                        <label for = "m">Tues</label>
+                        <label htmlFor = "m">Tues</label>
                     </div>
                     <div>
                         <input type="checkbox" id = "w" name = "days" value = "w" onChange={(e) => handleDayChange(e)} checked={eventDays.includes("w")}/>
-                        <label for = "m">Wed</label>
+                        <label htmlFor = "m">Wed</label>
                     </div>
                     <div>
                         <input type="checkbox" id = "th" name = "days" value = "th" onChange={(e) => handleDayChange(e)} checked={eventDays.includes("th")}/>
-                        <label for = "m">Thurs</label>
+                        <label htmlFor = "m">Thurs</label>
                     </div>
                     <div>
                         <input type="checkbox" id = "f" name = "days" value = "f" onChange={(e) => handleDayChange(e)} checked={eventDays.includes("f")}/>
-                        <label for = "m">Fri</label>
+                        <label htmlFor = "m">Fri</label>
                     </div>
                     <div>
                         <input type="checkbox" id = "s" name = "days" value = "s" onChange={(e) => handleDayChange(e)} checked={eventDays.includes("s")}/>
-                        <label for = "m">Sat</label>
+                        <label htmlFor = "m">Sat</label>
                     </div>
                 </fieldset>
                 <button onClick = {() => save()}>Save</button>
