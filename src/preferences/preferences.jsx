@@ -79,26 +79,14 @@ export function Preferences({user}) {
     <main className="bg-light text-dark">
             <form method = "get">
                 <fieldset>
-                    <legend>Select your preferences</legend>
+                    <legend>Select your preferences (default : all) </legend>
                     <div>
                         <input type="checkbox" id = "Sports" name = "interests" value = "Sports" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Sports")}/>
                         <label htmlFor = "Sports">Sports</label>
                     </div>
                     <div>
-                        <input type="checkbox" id = "Music" name = "interests" value = "Music" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Music")} />
-                        <label htmlFor = "Music">Music</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id = "Arts" name = "interests" value = "Arts" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Arts")} />
+                        <input type="checkbox" id = "Arts" name = "interests" value = "Arts & Theatre" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Arts & Theatre")} />
                         <label htmlFor = "Arts">Arts & Theatre</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id = "Film" name = "interests" value = "Film" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Film")} />
-                        <label htmlFor = "Film">Film</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id = "Misc" name = "interests" value = "Misc" onChange={(e) => handleTypeChange(e)} checked={eventTypes.includes("Misc")} />
-                        <label htmlFor = "Misc">Miscellaneous</label>
                     </div>
 
 
