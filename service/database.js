@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const config = requie('./dbConfig.json');
+const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
@@ -8,12 +8,13 @@ const db = client.db('NextEvent');
 const userCollection = db.collection('users');
 const preferenceCollection = db.collection('preferences');
 
-async function main() {
-    try {
-        // here is the database code
-    } finally {
-        client.close();
+(async function testConnection() {
+    try {   
+        await db.command({ping:1});
+        console.log(`DB connected to ${config.hostname}`);
+    } catch (ex) {
+        console.log(`Error with ${url} because ${ex.message}`);
+        process.exit(1);
     }
-}
+})();
 
-main();
