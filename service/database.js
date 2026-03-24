@@ -30,8 +30,13 @@ function getUser(value){
     return userCollection.findOne({email: value});
 }
 
+async function updateUserRemoveAuth(user){
+    await userCollection.updateOne({email: user.email}, {$unset: {token: 1}});
+}
+
 module.exports = {
     addUser,
     getUserByToken,
     getUser,
+    updateUserRemoveAuth,
 };
