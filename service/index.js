@@ -34,7 +34,7 @@ async function createUser(email, password){
         password: passwordHash,
     };
 
-    DB.addUser(user);
+    await DB.addUser(user);
 
     return user;
 }
@@ -49,8 +49,6 @@ function getUser(field, value){
 }
 
 function setAuthCookie(res, user) {
-    user.token = uuid.v4();
-
     res.cookie('token', user.token, {
         secure: true,
         httpOnly: true,
