@@ -18,3 +18,10 @@ const preferenceCollection = db.collection('preferences');
     }
 })();
 
+async function addUser(user){
+    await userCollection.insertOne(user);
+}
+
+module.exports = {
+    addUser,
+};
