@@ -22,6 +22,16 @@ async function addUser(user){
     await userCollection.insertOne(user);
 }
 
+function getUserByToken(value){
+    return userCollection.findOne({token: value});
+}
+
+function getUser(value){
+    return userCollection.findOne({email: value});
+}
+
 module.exports = {
     addUser,
+    getUserByToken,
+    getUser,
 };

@@ -40,10 +40,12 @@ async function createUser(email, password){
 }
 
 function getUser(field, value){
-    if (value) {
-        return users.find((user) => user[field] === value);
+    if (!value) return null;
+
+    if (field === 'token'){
+        return DB.getUserByToken(value);
     }
-    return null;
+    return DB.getUser(value);
 }
 
 function setAuthCookie(res, user) {
