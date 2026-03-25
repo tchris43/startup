@@ -22,16 +22,32 @@ async function addUser(user){
     await userCollection.insertOne(user);
 }
 
-function getUserByToken(value){
-    return userCollection.findOne({token: value});
+function getUserByToken(token){
+    return userCollection.findOne({token: token});
 }
 
-function getUser(value){
-    return userCollection.findOne({email: value});
+function getUser(userName){
+    return userCollection.findOne({userName: userName});
+}
+
+async function updateUser(user){
+    await userCollection.updateOne({userName: user.userName}, {$set: user});
 }
 
 async function updateUserRemoveAuth(user){
-    await userCollection.updateOne({email: user.email}, {$unset: {token: 1}});
+    await userCollection.updateOne({userName: user.userName}, {$unset: {token: 1}});
+}
+
+async function addPreferences(userName, preferences){
+    await preferenceCollection.insertOne({userName: userName, preferences: preferences});
+}
+
+function getPreferences(userName){
+    return preferenceCollection.findOne({userName:userName});
+}
+
+async function updatePreferences(userName, preferences){
+    await preferenceCollection.updateOne({userName:userName}, {$set: {userName:userName, preferences:preferences}});
 }
 
 module.exports = {
@@ -39,4 +55,8 @@ module.exports = {
     getUserByToken,
     getUser,
     updateUserRemoveAuth,
+    addPreferences,
+    updateUser,
+    getPreferences,
+    updatePreferences,
 };

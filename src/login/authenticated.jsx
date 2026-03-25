@@ -6,7 +6,7 @@ export function Authenticated({user, onLogout}) {
 
   function logout() {
     fetch(`/api/auth/logout`, {
-      method: 'delete',
+      method: 'DELETE',
     })
     .catch(() => {
 

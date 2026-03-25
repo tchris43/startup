@@ -24,21 +24,23 @@ export function Discover({ user }) {
     const [invite, setInvite] = React.useState(null);
 
     const [events, setEvents] = React.useState([]);
-
+    const [preferredEvents, setPreferredEvents] = React.useState([]);
 
     const [preferredTypes, setTypes] = React.useState([]);
     const [preferredDays, setDays] = React.useState([]);
 
+    async function setUp(){
+        const response = await fetch("/api/getPref");
+        const json = await response.json();
+        
+        setTypes(json.types);
+        setDays(json.days);
     
+    }
 
     React.useEffect(() => {
 
-        fetch("/api/getPref")
-        .then((response) => response.json())
-        .then((preferences) => {
-            setTypes(preferences.types);
-            setDays(preferences.days);
-        })
+        setUp();
 
         console.log("Fetching the API");
         fetch("https://app.ticketmaster.com/discovery/v2/events.json?apikey=GRGAmTWkOolvR63LJvSsnshUlS48au9A")
@@ -51,6 +53,15 @@ export function Discover({ user }) {
         .catch((error) => {
             console.log("Error fetching events: ", error);
         });
+
+        setPreferredEvents(events.filter((event) => {
+        const typeMatch = preferredTypes.length == 0 || preferredTypes.includes(event.type);
+        const dayMatch = preferredDays.length == 0 || preferredDays.includes(event.day);
+        
+        return typeMatch && dayMatch;
+        }));
+
+
     }, [])
 
     function toWeekday(dateTime){
@@ -82,15 +93,7 @@ export function Discover({ user }) {
         
     }
 
-   
 
-
-    const preferredEvents = events.filter((event) => {
-        const typeMatch = preferredTypes.length == 0 || preferredTypes.includes(event.type);
-        const dayMatch = preferredDays.length == 0 || preferredDays.includes(event.day);
-        
-        return typeMatch && dayMatch;
-    });
 
     const [currentIndex, setCurrentIndex] = React.useState(0);
 

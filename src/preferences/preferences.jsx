@@ -11,13 +11,6 @@ export function Preferences({user}) {
     const [eventTypes, setEventTypes] = React.useState([]);
     const [eventDays, setEventDays] = React.useState([]);
 
-    React.useEffect(() => {
-        localStorage.setItem('types', JSON.stringify(eventTypes));
-    }, [eventTypes]);
-
-    React.useEffect(() => {
-        localStorage.setItem('days', JSON.stringify(eventDays));
-    }, [eventDays]);
 
     React.useEffect(() => {
         fetch('api/getPref')
@@ -116,7 +109,7 @@ export function Preferences({user}) {
                         <label htmlFor = "m">Sat</label>
                     </div>
                 </fieldset>
-                <button onClick = {() => save()}>Save</button>
+                <button type="button" onClick = {() => save()}>Save</button>
 
                 
             </form>

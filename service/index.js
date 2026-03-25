@@ -26,12 +26,13 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-async function createUser(email, password){
+async function createUser(userName, password){
     const passwordHash = await bcrypt.hash(password, 10);
 
     const user = {
-        email: email,
+        userName: userName,
         password: passwordHash,
+        token: uuid.v4(),
     };
 
     await DB.addUser(user);
@@ -59,23 +60,28 @@ function setAuthCookie(res, user) {
 
 //Verify Auth endpoints are right for auth
 apiRouter.post('/auth/create', async (req, res) => {
-    if (await getUser('email', req.body.userName)) {
+    if (await getUser('userName', req.body.userName)) {
         res.status(409).send({msg: 'Existing user'});
     } else {
         const user = await createUser(req.body.userName, req.body.password);
 
         setAuthCookie(res, user);
 
-        res.send({email : user.email});
+        res.send({userName : user.userName});
     }
 });
 
 apiRouter.post('/auth/login', async(req,res) => {
-    const user = await getUser('email', req.body.userName);
+    const user = await getUser('userName', req.body.userName);
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
+        console.log('generating token');
+        var token = uuid.v4();
+        console.log('token is: ', token);
+        user.token = token;
+        await DB.updateUser(user);
         setAuthCookie(res, user);
 
-        res.send({ email: user.email});
+        res.send({ userName: user.userName});
     } else {
         res.status(401).send({msg: 'Unauthorized'});
     }
@@ -105,15 +111,23 @@ function verifyAuth(req, res, next){
 let preferences = {};
 
 
-apiRouter.post('/savePref', verifyAuth, (_req, res) => {
-    const user = getUser("token", _req.cookies[authCookieName]);
-    preferences[user.email] = _req.body;
+apiRouter.post('/savePref', verifyAuth, async (_req, res) => {
+    const user = await getUser("token", _req.cookies['token']);
+    // preferences[user.userName] = _req.body;
+    const preferences = DB.getPreferences(user.userName);
+    if (preferences){
+        DB.updatePreferences(user.userName, _req.body);
+    }
+    else{
+        DB.addPreferences(user.userName, _req.body);
+    }
     res.send(_req.body);
 });
 
-apiRouter.get('/getPref', verifyAuth, (req,res) => {
-    const user = getUser("token", req.cookies[authCookieName]);
-    const data = preferences[user.email];
+apiRouter.get('/getPref', verifyAuth, async (req,res) => {
+    const user = await getUser("token", req.cookies['token']);
+    console.log();
+    const data = await DB.getPreferences(user.userName);
     res.send(data);
 });
 

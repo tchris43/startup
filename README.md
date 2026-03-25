@@ -91,19 +91,19 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [x] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [x] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [x] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [x] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [x] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - 
+- [x] **Static middleware for frontend** - 
+- [x] **Calls to third party endpoints** - 
+- [x] **Backend service endpoints** - 
+- [x] **Frontend calls service endpoints** - 
+- [x] **Supports registration, login, logout, and restricted endpoint** - 
 
 ## 🚀 DB deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [x] **Stores data in MongoDB** 
+- [x] **Stores credentials in MongoDB**
 
 ## 🚀 WebSocket deliverable
 
