@@ -13,13 +13,20 @@ export function Preferences({user}) {
 
 
     React.useEffect(() => {
-        fetch('api/getPref')
+        fetch('/api/getPref')
         .then(res => res.json())
         .then(preferences => {
-            setEventTypes(preferences?.types || []);
-            setEventDays(preferences?.days || []);
+            const types = preferences?.types ?? JSON.parse(localStorage.getItem("types")) ?? [];
+            const days = preferences?.days ?? JSON.parse(localStorage.getItem("days")) ?? [];
+
+            setEventTypes(types);
+            setEventDays(days);
         })
-    }, [])
+        .catch(() => {
+            setEventTypes(JSON.parse(localStorage.getItem("types")) || []);
+            setEventDays(JSON.parse(localStorage.getItem("days")) || []);
+        });
+    }, []);
 
     
 
@@ -27,26 +34,33 @@ export function Preferences({user}) {
     function handleTypeChange(e){
         const val = e.target.value;
 
+        let updatedTypes;
+
         if (eventTypes.includes(val)){
-            setEventTypes(eventTypes.filter(type => type !== val));
+            updatedTypes = eventTypes.filter(type => type !== val);
         }
         else {
-            setEventTypes([...eventTypes, val]);
+            updatedTypes = [...eventTypes, val];
         }
 
-        localStorage.setItem('types', JSON.stringify(eventTypes));
+        setEventTypes(updatedTypes);
+        localStorage.setItem('types', JSON.stringify(updatedTypes));
     }
 
     function handleDayChange(e){
         const val = e.target.value;
+
+        let updatedDays;
         
         if (eventDays.includes(val)){
-            setEventDays(eventDays.filter(day => day !== val));
+            updatedDays = eventDays.filter(day => day !== val);
         }
         else {
-            setEventDays([...eventDays, val])
+            updatedDays = [...eventDays, val];
         }
-        localStorage.setItem('days', JSON.stringify(eventDays));
+
+        setEventDays(updatedDays);
+        localStorage.setItem('days', JSON.stringify(updatedDays));
     }
 
     
