@@ -24,7 +24,7 @@ export function Unauthenticated({user, onLogin}) {
     await res.json();
     if (res.ok){
       onLogin(userName);
-      localStorage.setItem('user', user);
+      localStorage.setItem('user', userName);
       navigate('/discover');
     } else {
       alert('Authentication failed');

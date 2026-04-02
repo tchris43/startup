@@ -11,13 +11,14 @@ export function Preferences({user}) {
     const [eventTypes, setEventTypes] = React.useState([]);
     const [eventDays, setEventDays] = React.useState([]);
 
-
+    console.log(eventTypes);
+    console.log(eventDays);
     React.useEffect(() => {
         fetch('/api/getPref')
         .then(res => res.json())
         .then(preferences => {
-            const types = preferences?.types ?? JSON.parse(localStorage.getItem("types")) ?? [];
-            const days = preferences?.days ?? JSON.parse(localStorage.getItem("days")) ?? [];
+            const types = preferences?.preferences.types ?? JSON.parse(localStorage.getItem("types")) ?? [];
+            const days = preferences?.preferences.days ?? JSON.parse(localStorage.getItem("days")) ?? [];
 
             setEventTypes(types);
             setEventDays(days);
