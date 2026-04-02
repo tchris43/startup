@@ -32,4 +32,31 @@ class InviteEventNotifier {
             } catch {}
         };
     }
+
+
+    broadcastEvent(from, type, value){
+        const event = new EventMessage(from, type, value);
+        this.socket.send(JSON.stringify(event));
+    }
+
+    addHandler(handler) {
+        this.handlers.push(handler);
+    }
+
+    removeHandler(handler) {
+        this.handlers.filter((h) => h !== handler);
+    }
+
+    receiveEvent(event) {
+        this.events.push(event);
+
+        this.events.forEach((e) => {
+            this.handlers.forEach((handler) => {
+                handler(e);
+            });
+        });
+    }
 }
+
+const InviteNotifier = new InviteEventNotifier();
+export { InviteEvent, InviteNotifier};
