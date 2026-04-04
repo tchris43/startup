@@ -114,7 +114,7 @@ let preferences = {};
 apiRouter.post('/savePref', verifyAuth, async (_req, res) => {
     const user = await getUser("token", _req.cookies['token']);
     // preferences[user.userName] = _req.body;
-    const preferences = DB.getPreferences(user.userName);
+    const preferences = await DB.getPreferences(user.userName);
     if (preferences){
         DB.updatePreferences(user.userName, _req.body);
     }

@@ -47,7 +47,7 @@ function getPreferences(userName){
 }
 
 async function updatePreferences(userName, preferences){
-    await preferenceCollection.updateOne({userName:userName}, {$set: {userName:userName, preferences:preferences}});
+    await preferenceCollection.updateOne({userName:userName}, {$set: {preferences:preferences}});
 }
 
 module.exports = {

@@ -32,36 +32,26 @@ export function Discover({ user }) {
     async function setUp(){
         const response = await fetch("/api/getPref");
         const json = await response.json();
-        
-        setTypes(json.types);
-        setDays(json.days);
+
+        const eventResponse = await fetch("https://app.ticketmaster.com/discovery/v2/events.json?apikey=GRGAmTWkOolvR63LJvSsnshUlS48au9A");
+        const eventData = await eventResponse.json();
     
-    }
-
-    React.useEffect(() => {
-
-        setUp();
-
-        console.log("Fetching the API");
-        fetch("https://app.ticketmaster.com/discovery/v2/events.json?apikey=GRGAmTWkOolvR63LJvSsnshUlS48au9A")
-        .then((response) => response.json())
-        .then((data) => {
-            console.log("got the response!");
-            console.log(data._embedded.events);
-            parseResponse(data);
-        })
-        .catch((error) => {
-            console.log("Error fetching events: ", error);
-        });
-
-        setPreferredEvents(events.filter((event) => {
-        const typeMatch = preferredTypes.length == 0 || preferredTypes.includes(event.type);
-        const dayMatch = preferredDays.length == 0 || preferredDays.includes(event.day);
+        console.log("got the response!");
+        console.log(eventData._embedded.events);
+        const parsedEvents = parseResponse(eventData);
+        console.log(json.preferences.types);
+        console.log(json.preferences.days);
+        console.log(parsedEvents);
+        setPreferredEvents(parsedEvents.filter((event) => {
+        const typeMatch = json.preferences.types.length == 0 || json.preferences.types.includes(event.type);
+        const dayMatch = json.preferences.days.length == 0 || json.preferences.days.includes(event.day);
         
         return typeMatch && dayMatch;
         }));
+    }
 
-
+    React.useEffect(() => {
+        setUp();
     }, [])
 
     function toWeekday(dateTime){
@@ -88,7 +78,7 @@ export function Discover({ user }) {
                 day: day
             });
         }
-        setEvents(parsedEvents);
+        return parsedEvents;
        
         
     }
