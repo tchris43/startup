@@ -1,21 +1,50 @@
 import React from 'react';
 import './discover.css';
+import {InviteEvent, InviteNotifier} from './eventNotifier.js';
 
 
 
 export function Discover({ user }) {
     const [count, setCount] = React.useState(parseInt(localStorage.getItem('count')) || 0);
     const [msg, setMsg] = React.useState('...listening');
+    const [inviteEvents, setInviteEvents] = React.useState([]);
 
     React.useEffect(() => {
-        setInterval(() => {
-            const names = ['bob', 'fish', 'tim'];
-            const randomName = names[Math.floor(Math.random() * names.length)];
-            const randomCount = Math.floor(Math.random() * 9) + 1;
-            const newMsg = `${randomName}: come with me to event ${randomCount}!`;
-            setMsg(newMsg);
-        }, 5000);
-    }, [])
+        InviteNotifier.addHandler(handleInviteEvent);
+
+        return () => {
+            InviteNotifier.removeHandler(handleInviteEvent);
+        };
+    });
+
+    function handleInviteEvent(inviteEvent) {
+        setInviteEvents([...inviteEvents, inviteEvent]);
+    }
+
+    function createInviteArray() {
+        const messageArray = [];
+        for (const [i, inviteEvent] of inviteEvents.entries()) {
+            console.log(inviteEvent);
+            let message = `${inviteEvent.from}: ${inviteEvent.value}`;
+
+            messageArray.push(
+                <div key={i}>
+                    <span> {message} </span>
+                </div>
+            );
+        }
+        return messageArray;
+    }
+
+    // React.useEffect(() => {
+    //     setInterval(() => {
+    //         const names = ['bob', 'fish', 'tim'];
+    //         const randomName = names[Math.floor(Math.random() * names.length)];
+    //         const randomCount = Math.floor(Math.random() * 9) + 1;
+    //         const newMsg = `${randomName}: come with me to event ${randomCount}!`;
+    //         setMsg(newMsg);
+    //     }, 5000);
+    // }, [])
 
 
 
@@ -121,10 +150,11 @@ export function Discover({ user }) {
 
             <label for="invites">Invites:</label>
             <textarea id="invites" name="invites" onChange={(e) => setInvite(e.target.value)}>Post and Recieve Invites!</textarea>
-            <div className="position-fixed bottom-0 end-0 alert alert-info"> {msg} </div>
+            <div className="position-fixed bottom-0 end-0 alert alert-info"> {createInviteArray()} </div>
             <button onClick={() => {
                 setPop(`"${user}: ${invite}" successfully posted!`);
                 setTimeout(() => setPop(null), 3000);
+                InviteNotifier.broadcastEvent(user, InviteEvent.Invite, invite);
             }}>Post!</button>
 
         </main>

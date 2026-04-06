@@ -6,6 +6,8 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const DB = require('./database.js');
 
+const {peerProxy} = require('./peerProxy.js');
+
 const authCookieName = "token";
 
 let users = [];
@@ -137,7 +139,7 @@ apiRouter.get('/getPref', verifyAuth, async (req,res) => {
 
 
 
-app.listen(port, () => {
+const httpService = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
 

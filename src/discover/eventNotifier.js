@@ -27,6 +27,7 @@ class InviteEventNotifier {
         };
         this.socket.onmessage = async (msg) => {
             try {
+                console.log(`Recieved: ${msg}`);
                 const event = JSON.parse(await msg.data.text());
                 this.receiveEvent(event);
             } catch {}
@@ -35,6 +36,7 @@ class InviteEventNotifier {
 
 
     broadcastEvent(from, type, value){
+        console.log("In broadcast");
         const event = new EventMessage(from, type, value);
         this.socket.send(JSON.stringify(event));
     }
@@ -48,13 +50,13 @@ class InviteEventNotifier {
     }
 
     receiveEvent(event) {
-        this.events.push(event);
-
-        this.events.forEach((e) => {
+        if (event.type == "invite") {
+            console.log(this.handlers);
             this.handlers.forEach((handler) => {
-                handler(e);
-            });
-        });
+                console.log("handling");
+                handler(event);
+            })
+        }
     }
 }
 
