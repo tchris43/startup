@@ -21,20 +21,7 @@ export function Discover({ user }) {
         setInviteEvents([...inviteEvents, inviteEvent]);
     }
 
-    function createInviteArray() {
-        const messageArray = [];
-        for (const [i, inviteEvent] of inviteEvents.entries()) {
-            console.log(inviteEvent);
-            let message = `${inviteEvent.from}: ${inviteEvent.value}`;
-
-            messageArray.push(
-                <div key={i}>
-                    <span> {message} </span>
-                </div>
-            );
-        }
-        return messageArray;
-    }
+    
 
     // React.useEffect(() => {
     //     setInterval(() => {
@@ -58,6 +45,7 @@ export function Discover({ user }) {
     const [preferredTypes, setTypes] = React.useState([]);
     const [preferredDays, setDays] = React.useState([]);
 
+    
     async function setUp(){
         const response = await fetch("/api/getPref");
         const json = await response.json();
@@ -125,6 +113,43 @@ export function Discover({ user }) {
         }
     }
 
+    function createInviteArray() {
+        const messageArray = [];
+        for (const [i, inviteEvent] of inviteEvents.entries()) {
+          
+            console.log("In the event");
+            console.log(inviteEvent.value);
+
+            let message = `${inviteEvent.from}: ${inviteEvent.value.message}`;
+
+            
+
+            messageArray.push(
+                <div key={i}>
+                    <figcaption>{inviteEvent.value.event} </figcaption>
+                    <a href= {inviteEvent.value.url} > Event Link </a>
+                    <div> {message} </div>
+                </div>
+            );
+        }
+        return messageArray;
+    }
+
+    const [text, setText] = React.useState("");
+
+    function sendInvite() {
+        let value = {message: text, event: preferredEvents[currentIndex].name, url: preferredEvents[currentIndex].url};
+        if (text == ""){
+            value.message = "Post and Recieve Invites!";
+        }
+        console.log(`This is the value: ${value}`);
+        // setInvite(value);
+        console.log(`set invite to ${value}`);
+        console.log(value);
+        return value
+    }
+
+
     return (
         <main className="bg-light text-dark">
             <h2>
@@ -133,10 +158,10 @@ export function Discover({ user }) {
 
             {preferredEvents.length === 0 && <div>No events match your preferences.</div>}
             {preferredEvents.length > 0 && (
-                <span className="card left-card">
-                    <figcaption>{preferredEvents[currentIndex].name} </figcaption>
-                    <a href= {preferredEvents[currentIndex].url} > Event Link </a>
-                </span>
+            <span className="card left-card">
+                <figcaption>{preferredEvents[currentIndex].name} </figcaption>
+                <a href= {preferredEvents[currentIndex].url} > Event Link </a>
+            </span>
             )}
 
             <button onClick={() => getNextEvent()}>Next</button>
@@ -149,12 +174,14 @@ export function Discover({ user }) {
 
 
             <label for="invites">Invites:</label>
-            <textarea id="invites" name="invites" onChange={(e) => setInvite(e.target.value)}>Post and Recieve Invites!</textarea>
+            <textarea id="invites" name="invites" onChange={(e) => setText(e.target.value)}>Post and Recieve Invites!</textarea>
             <div className="position-fixed bottom-0 end-0 alert alert-info"> {createInviteArray()} </div>
             <button onClick={() => {
-                setPop(`"${user}: ${invite}" successfully posted!`);
+                let newInvite = sendInvite();
+                console.log(`this is the new invite ${newInvite.message}`);
+                setPop(`"${user}: ${newInvite.message}" successfully posted!`);
                 setTimeout(() => setPop(null), 3000);
-                InviteNotifier.broadcastEvent(user, InviteEvent.Invite, invite);
+                InviteNotifier.broadcastEvent(user, InviteEvent.Invite, newInvite);
             }}>Post!</button>
 
         </main>
